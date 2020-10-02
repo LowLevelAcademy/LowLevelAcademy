@@ -1,0 +1,436 @@
+@import "colors";
+@import "progressbar";
+
+.no-select {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Chrome and Opera */
+}
+
+.no-padding {
+  padding: 0;
+}
+a.undecorated {
+  text-decoration: none;
+}
+a {
+  color: $color-accent;
+}
+a:visited {
+}
+a:hover {
+  color: darken($color-accent, 15%);
+}
+a:active {
+}
+a.back-link {
+  font-size: 42px;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  font-size: 20px;
+  line-height: 1.7;
+  color: $color-dark;
+}
+
+.module-animation {
+  position: inherit;
+}
+
+.module-description {
+  margin-top: 320px;
+}
+
+.zdog-canvas {
+  position: absolute;
+  display: block;
+  left: 0;
+  margin-top: 55px;
+  width: 100%;
+  height: 200px;
+}
+
+h1,
+h2 {
+  font-family: "Dosis", sans-serif;
+  color: $color-dark;
+}
+h1 {
+  font-size: 45px;
+}
+h2 {
+  font-size: 34px;
+}
+
+#headbar {
+  height: 70px;
+  margin-bottom: 80px;
+  margin-top: 40px;
+}
+#logo-block {
+  height: 100%;
+}
+#logo-block:before {
+  content: "";
+  display: inline-block;
+  height: inherit;
+  vertical-align: middle;
+}
+
+#sign {
+  height: 46px;
+  width: auto;
+}
+#lla {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 20px;
+  font-family: "Dosis", sans-serif;
+  font-size: 34px;
+  color: $color-dark;
+}
+#nav-block {
+  height: inherit;
+  font-family: "Dosis", sans-serif;
+  font-size: 22px;
+  color: $color-dark;
+}
+#nav-block a {
+  color: inherit;
+}
+#nav-block:before {
+  content: "";
+  display: inline-block;
+  height: inherit;
+  vertical-align: middle;
+}
+#nav-block ul {
+  display: inline-block;
+  padding-left: 0;
+  margin: 0;
+  font-size: 22px;
+  width: 95%;
+}
+#nav-block li {
+  display: inline-block;
+  vertical-align: middle;
+  list-style-type: none;
+  margin-left: 10%;
+}
+#nav-block li:nth-of-type(1) {
+  margin-left: 0;
+}
+#nav-block .active-section {
+  color: $color-accent;
+}
+
+.module_badge {
+  color: $color-dark;
+  display: inline-block;
+  border-radius: 8px;
+  padding: 4px 14px 4px 14px;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+  vertical-align: middle;
+  margin-left: 20px;
+  display: inline-block;
+  margin-bottom: 5px;
+}
+#module_header,
+#lesson_header {
+  margin-bottom: 60px;
+}
+#module_contents {
+  margin-bottom: 80px;
+}
+#module_contents > div {
+  padding: 3px;
+}
+
+.beginner_badge {
+  border: 3px $color-accent solid;
+}
+
+.module_tile {
+  position: relative;
+  height: 100%;
+  padding: 30px;
+  border-radius: 14px;
+  color: $color-dark;
+  border: 3px solid white;
+  transition: border-color 0.2s;
+}
+.inactive_module > div {
+  opacity: 0.5;
+  transition: opacity 0.6s ease-in-out;
+}
+.inactive_module > div:hover {
+  opacity: 0.6;
+}
+.module_tile:hover {
+  border: 3px solid $color-accent;
+}
+.inactive_module:hover {
+  border: 3px solid $color-page-background;
+  cursor: auto;
+}
+
+.module_tile h3 {
+  font-weight: bold;
+  font-size: 22px;
+}
+.module_tile p {
+  font-size: 17px;
+}
+
+.lesson_icon {
+  width: 58%;
+  margin-left: 6px;
+}
+
+#content-container,
+#footer-container > .container-fluid {
+  max-width: 1800px;
+}
+
+.lesson_text > div.col-10,
+#lesson_header > div.col-10,
+#footer-fundraise > div.col-10 {
+  max-width: 1200px;
+}
+#module_header > div.col-10 {
+  max-width: 1350px;
+}
+
+#footer-container {
+  background-color: $color-dark;
+}
+
+#footer-block {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  color: white;
+  font-size: 18px;
+}
+
+ul.contacts_and_social,
+ul.footer_links {
+  display: inline;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  vertical-align: middle;
+}
+ul.contacts_and_social li {
+  display: inline;
+  margin-right: 15px;
+}
+ul.footer_links li {
+  display: inline;
+  margin-right: 16px;
+}
+ul.contacts_and_social a {
+  text-decoration: none;
+}
+.contacts_and_social img {
+  max-height: 32px;
+  max-width: 32px;
+  opacity: 0.7;
+}
+.contacts_and_social img:hover,
+.footer_links a:hover {
+  opacity: 1;
+  transition: 0.2s ease-in-out;
+}
+.emailicon {
+  margin-right: 24px;
+}
+.footer_links a {
+  color: white;
+  opacity: 0.7;
+}
+#footer-block span {
+  vertical-align: middle;
+}
+#footer-fundraise > div {
+  padding: 30px;
+  border-radius: 14px;
+  margin-bottom: 30px;
+  font-size: 80%;
+}
+
+/* IE8 */
+.is-last-step:after {
+  display: none !important;
+}
+
+span.dashed-message {
+  padding: 10px 20px 10px 20px;
+  border-radius: 10px;
+  border: 1px dashed #cbcbcb;
+  margin-top: 10px;
+}
+
+a[rel="license"] {
+  margin-left: 6px;
+}
+
+.form-inline {
+  padding-top: 20px;
+  padding-bottom: 28px;
+}
+
+textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+.uneditable-input:focus,
+.btn:focus {
+  border-color: rgba(22%, 75%, 47%, 0.6);
+  box-shadow: 0px 0px 0px 3px rgba(22%, 75%, 47%, 0.3);
+  outline: 0 none;
+}
+.form-control::-webkit-input-placeholder {
+  color: #879296;
+}
+.form-control:-moz-placeholder {
+  color: #879296;
+}
+.form-control::-moz-placeholder {
+  color: #879296;
+}
+.form-control:-ms-input-placeholder {
+  color: #879296;
+}
+.form-control::-ms-input-placeholder {
+  color: #879296;
+}
+
+.btn-grey {
+  border-color: $color-dark;
+  background-color: #576266;
+  color: white;
+}
+.btn-grey:hover {
+  color: white;
+  background-color: $color-dark;
+}
+
+.btn-green {
+  border-color: #33b872;
+  background-color: $color-accent;
+  color: white;
+}
+.btn-green:hover {
+  color: white;
+  background-color: #199e58;
+}
+
+.about-description {
+  padding-right: 15%;
+}
+
+.about-description p {
+  color: $color-light-dark;
+}
+
+#team img {
+  width: 100%;
+}
+
+#opensource img {
+  width: 100%;
+}
+
+#team > div > .row,
+#opensource > div > .row {
+  margin-top: 60px;
+  margin-bottom: 85px;
+}
+
+#team > div > .row .row,
+#opensource > div > .row .row {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.teammember-social {
+  list-style-type: none;
+  padding: 0;
+}
+
+.team-social-icon {
+  vertical-align: middle;
+  display: inline-block;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 28px;
+  height: 28px;
+  margin-right: 8px;
+  opacity: 0.7;
+}
+.tsi-facebook {
+  background-image: url(/images/icons/facebook_outline_color.svg);
+}
+.tsi-instagram {
+  background-image: url(/images/icons/instagram_outline_color.svg);
+}
+.tsi-twitter {
+  margin-top: 4px;
+  background-image: url(/images/icons/twitter_outline_color.svg);
+}
+.tsi-telegram {
+  background-image: url(/images/icons/telegram_outline_color.svg);
+}
+.tsi-github {
+  background-image: url(/images/icons/github-round_dark.svg);
+}
+
+/* < xl */
+@media only screen and (min-width: 0px) and (max-width: 1200px) {
+  #footer-block {
+    font-size: 17px;
+  }
+  ul.footer_links li {
+    margin-right: 14px;
+  }
+}
+
+/* < lg */
+@media only screen and (min-width: 0px) and (max-width: 992px) {
+  ul.footer_links {
+    display: block;
+    margin-top: 25px;
+    margin-bottom: 15px;
+  }
+}
+
+/* < md */
+@media only screen and (min-width: 0px) and (max-width: 768px) {
+}
+
+/* > sm */
+@media only screen and (min-width: 768px) {
+}
+
+/* Lessons */
+.lesson_text p {
+  font-size: 85%;
+}

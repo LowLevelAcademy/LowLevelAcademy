@@ -1,0 +1,74 @@
+import {
+  wrapFullDemoCode,
+  wrapIpHeaderCode,
+  wrapUdpHeaderCode,
+} from "../../playground/lesson1/rust";
+import {
+  DnsRequestForm,
+  Playground,
+  FullDemoVis,
+  FinalTestPlayground,
+  IpPacketsVis,
+  UdpDatagramVis,
+} from "./DynamicContents";
+
+We have now seen how IP addresses are used in a small, imaginary network of two computers.
+But just knowing an address isn’t enough to do something useful: machines need to follow a well-known
+protocol to make sure they can communicate with each other in a predictable way. This is what the
+Internet protocol suite, also known as [TCP/IP](https://en.wikipedia.org/wiki/Internet_protocol_suite),
+is about: it's a standard collection of protocols used on the Internet.
+
+The protocol suite consists of several protocols, of which we are interested in two: IP and UDP (later
+we will also cover TCP and other protocols).
+
+&#8203;<abbr title="Internet Protocol">IP</abbr> is the bread and butter of networking.
+It serves as a foundation for high-level protocols. When computers exchange
+messages, they encode them into IP _packets_, which you can view as individual
+message units of up to 65 kilobytes in size. Usually, the operating system takes
+care of the encoding for us and we don't need to do it manually, but it's still
+good to know how it works under the hood, so let's see what a typical IP packet
+looks like:
+
+<Playground id="ipPackets" codeWrapperFn={wrapIpHeaderCode}>
+  <IpPacketsVis />
+</Playground>
+
+When you run this code, you see the destructured IP packet in a table. Each table cell contains an
+individial field of the packet header. The header fields we set in code are highlighted in green—we
+can skip the rest of them, for now.
+
+On the right side, you can see the exact same packet represented in the
+[_hexadecimal_](https://simple.wikipedia.org/wiki/Hexadecimal) numerical system which is often used
+to represent bytes because of its compactness (each single byte can be encoded by a hexadecimal
+number ranging from `0x00` to `0xFF`, which [corresponds to decimal](https://duckduckgo.com/?q=0xFF+in+decimal&t=hk&ia=answer)
+`0` to `255`). This demonstrates that the IP header is just a sequence of numbers that we can interpret
+and represent in different ways.
+
+## User Datagram Protocol
+
+&#8203;<abbr title="User Datagram Protocol">UDP</abbr>, or User Datagram Protocol, is a
+thin layer above IP which adds some more contextual information for a message. A
+UDP <abbr title="a word combination of data + telegram">datagram</abbr>
+is also divided into a header and a payload. The fun thing about it is that an
+entire UDP datagram is the _payload_ of an IP packet! This is called
+_encapsulation_ and it's one of the core ideas in networking. A single layer of
+the network stack like IP doesn’t know and doesn’t care about its payload, which
+can be a protocol from the Internet protocol suite like TCP and UDP or even a
+protocol defined by you.
+
+UDP headers are only 8 bytes long. They contain source and destination _port numbers_ which help to identify
+different services running on the same computer—it's very common for a server to have many functions. Usually,
+we designate a specific port number for a given service by convention. For example, name servers commonly use
+the port number 53.
+
+A UDP header also includes the total size of a datagram in bytes and a _checksum_ which is used to verify
+that the original network packet is not corrupted during transmission. And that's all it adds to the IP header!
+
+Let's construct a UDP datagram header and add it to the previous example:
+
+<Playground id="udpDatagram" codeWrapperFn={wrapUdpHeaderCode}>
+  <UdpDatagramVis />
+</Playground>
+
+Now we are ready to move onto sending messages we have constructed
+over the network!

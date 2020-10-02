@@ -1,0 +1,79 @@
+$color-progress-line: lighten($color-light-dark, 45%);
+$color-progress-inactive-points: lighten($color-light-dark, 35%);
+
+.lesson_progress {
+  list-style: none;
+  margin: 70px 0 80px 0;
+  padding: 0;
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+  color: $color-dark;
+  color: $color-light-dark;
+}
+.lesson_progress a {
+  color: $color-dark;
+  text-decoration: none;
+}
+.lesson_progress a:hover {
+  text-decoration: underline;
+}
+.lesson_progress > li {
+  cursor: pointer;
+  position: relative;
+  display: table-cell;
+  text-align: center;
+  font-size: 0.8em;
+  transition: color .2s;
+}
+.lesson_progress > li:hover {
+  color: $color-dark;
+}
+.lesson_progress > li:before {
+  content: attr(data-step);
+  display: block;
+  margin: 0 auto;
+  background: $color-progress-line;
+  transition: background .2s;
+  width: 3em;
+  height: 3em;
+  text-align: center;
+  margin-bottom: 0.5em;
+  line-height: 3em;
+  border-radius: 100%;
+  position: relative;
+  z-index: 1000;
+}
+.lesson_progress > li:hover:before {
+  background: $color-progress-inactive-points;
+}
+.lesson_progress > li:after {
+  content: '';
+  position: absolute;
+  display: block;
+  background: $color-progress-line;
+  transition: background .2s;
+  width: 100%;
+  height: 0.5em;
+  top: 1.25em;
+  left: 50%;
+  margin-left: 1.5em\9;
+  z-index: -1;
+}
+.lesson_progress > li:last-child:after {
+  display: none;
+}
+.lesson_progress > li.is_complete:before, .lesson_progress > li.is_complete:after {
+  color: $color-page-background;
+  background: $color-dark;
+}
+.lesson_progress > li.is_pre_active:after {
+  background: linear-gradient(to right, $color-dark 50%, $color-accent 90%);
+}
+.lesson_progress > li.is_active > a {
+  color: $color-accent;
+}
+.lesson_progress > li.is_active:before {
+  color: $color-page-background;
+  background: $color-accent;
+}

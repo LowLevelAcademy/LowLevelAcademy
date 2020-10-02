@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+        <channel>
+                <title>Low-Level Academy</title>
+                <description>New courses and lessons.</description>
+                <link>https://lowlvl.org</link>
+                <atom:link href="https://lowlvl.org/updates.xml" rel="self" type="application/rss+xml" />
+                <item>
+                        <title>Exchanging Messages</title>
+                        <description>Introduction to UDP: sockets, frames, and data encoding. We build a client for a simple name server that converts domain names into IP addresses.</description>
+                        <pubDate>Wed, 16 Sep 2020 09:00:00 GMT</pubDate>
+                        <link>https://lowlvl.org/lesson1.html</link>
+                        <guid isPermaLink="true">https://lowlvl.org/lesson1.html</guid>
+                </item>
+        </channel>
+</rss>

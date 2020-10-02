@@ -1,0 +1,58 @@
+import {
+  wrapFullDemoCode,
+  wrapIpHeaderCode,
+  wrapUdpHeaderCode,
+} from "../../playground/lesson1/rust";
+import {
+  DnsRequestForm,
+  Playground,
+  FullDemoVis,
+  FinalTestPlayground,
+  IpPacketsVis,
+  UdpDatagramVis,
+} from "./DynamicContents";
+
+Now we know how UDP datagrams and IP packets are constructed, but we
+don't have to do this ourselves all the time. Instead, we can use
+tools and functions provided by the operating system and the
+standard library of our programming language. In Rust, these
+functions are part of the [`std::net`](https://doc.rust-lang.org/stable/std/net/index.html)
+module.
+
+We can use the [`UdpSocket::bind`](https://doc.rust-lang.org/stable/std/net/struct.UdpSocket.html#method.bind)
+function to construct _sockets_, which are virtual files that associate your program with a given port number.
+All UDP datagrams incoming to this port will be redirected to your program by the operating system.
+
+[`UdpSocket::send_to`](https://doc.rust-lang.org/stable/std/net/struct.UdpSocket.html#method.send_to) can be used
+to construct UDP datagrams from a given payload and send them over the network. We can wait for a response by using
+the [`UdpSocket::recv_from`](https://doc.rust-lang.org/stable/std/net/struct.UdpSocket.html#method.recv_from)
+function, which returns an IP address and a port number of a sender along with the message payload. In the case of
+the name server request, we can interpret the payload as an IP address. If we send a request for Alice’s address to
+the name server, we should get it back in this response!
+
+Let's give it a try:
+
+<Playground id="udpApi" codeWrapperFn={wrapFullDemoCode}>
+  <FullDemoVis />
+</Playground>
+
+When you run this code, you can find a list of all IP packets you send and receive on the right. You can browse the
+contents of IP packet headers and UDP datagrams. You can also find contents of an original message represented in
+hexadecimal format below the packet browser.
+
+With everything we have learned, you should be ready for a final test. In this test, you need to send a message to
+your friend Alice. You know that she uses the port number `1000`—but you don't know her IP address yet! Maybe the
+name server can help?
+
+<FinalTestPlayground />
+
+Congratulations, you have finished this lesson!
+
+In the next one, we will cover the topic of fragmentation. So far we have been dealing with small messages only,
+but what if you want to send a larger file, like a photo to share with your friend? We will learn how to break
+large messages into small parts and how to reconstruct original files in the next lesson.
+
+<span className="dashed-message">
+  If you would like to follow updates, you can{" "}
+  <a href="https://eepurl.com/haHQUn">subscribe to our mailing list</a>.
+</span>

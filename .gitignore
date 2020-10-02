@@ -1,0 +1,11 @@
+dist/
+node_modules
+.pnp.js
+.yarn/
+.next/
+.cache/
+.vscode/
+*.html
+package-lock.json
+yarn.lock
+.env.local

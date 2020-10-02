@@ -1,0 +1,33 @@
+import { wrapFullDemoCode } from "../../playground/lesson1/rust";
+import { DnsRequestForm, Playground, FullDemoVis } from "./DynamicContents";
+
+When you opened this page in your web browser, your computer exchanged data with quite a few servers on the internet,
+almost unnoticeably to you. In this lesson, we’ll build a network client application, which does something similar to
+your browser in this situation.
+
+It all starts with an _address_: you want to send a message to your friend Alice, but your computer needs to know
+_where_ these messages should be sent for the message to be delivered to the right computer—just like you need to
+provide a recipient address when you send an email.
+
+We are used to one kind of address system: _domain names_, like `lowlvl.org` or `duckduckgo.com`. However, these
+addresses are intended to be used by human beings; machines use another addressing system.
+Internet protocol (or _IP_) addresses look like `192.168.0.1`. In order to find out which IP address we should use
+for a domain name like `lowlvl.org`, we ask a _name server_, a computer with a well-known IP address like
+`1.2.3.4`. A name server understands DNS, or the domain name service _protocol_. Protocols are languages in
+which computers can talk to each other.
+
+So why don't we give it a try? Let's translate a domain name into an IP address:
+
+<div id="lesson1-dns-form">
+  <DnsRequestForm />
+</div>
+
+Below you see a code example written in Rust (if you are not familiar with the Rust syntax, you can refer to
+[The Rust Book](https://doc.rust-lang.org/book/) and learn by example).
+
+<Playground id="fullDemo" codeWrapperFn={wrapFullDemoCode}>
+  <FullDemoVis />
+</Playground>
+
+This should give you a taste of what it's like to work with computer networks. Now let's start looking into
+what makes this code tick!

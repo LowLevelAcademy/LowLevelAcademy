@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   sodipodi:docname="logo.svg"
+   inkscape:version="1.0beta2 (unknown)"
+   id="experimental_logo"
+   viewBox="0 0 10.495521 10.49542"
+   height="100px"
+   width="100px">
+   <g
+      transform="translate(-139.13914,-109.65706)">
+      <rect
+         ry="0.37781486"
+         rx="0.37781486"
+         y="109.65708"
+         x="139.13928"
+         height="2.5861259"
+         width="2.5861259"
+         id="prim_top_left"
+         style="opacity:1;fill:rgba(0,0,0,0.1);">
+         <animate attributeName="fill"
+            begin="1.4s;op.end+0.4s"
+            dur="0.6s"
+            values="rgba(0,0,0,0.1); rgba(0,0,0,0.3); rgba(0,0,0,0.1);"
+            repeatCount="1"/>
+      </rect>
+      <circle
+         r="1.2930629"
+         cy="110.95012"
+         cx="144.38698"
+         id="prim_top_center"
+         style="opacity:1;fill:rgba(0,0,0,0.1);">
+         <animate attributeName="fill"
+            begin="1.5s;op.end+0.5s"
+            dur="0.6s"
+            values="rgba(0,0,0,0.1); rgba(0,0,0,0.3); rgba(0,0,0,0.1);"
+            repeatCount="1"/>
+      </circle>
+      <rect
+         transform="rotate(45)"
+         ry="0.29208049"
+         rx="0.29208049"
+         y="-27.439423"
+         x="182.34727"
+         height="1.9992782"
+         width="1.9992782"
+         id="prim_top_right"
+         style="opacity:1;fill:rgba(0,0,0,0.1);">
+         <animate attributeName="fill"
+            begin="1.6s;op.end+0.6s"
+            dur="0.6s"
+            values="rgba(0,0,0,0.1); rgba(0,0,0,0.3); rgba(0,0,0,0.1);"
+            repeatCount="1"/>
+      </rect>
+      <rect
+         width="1.9992782"
+         height="1.9992782"
+         x="179.55067"
+         y="-19.050346"
+         rx="0.29208049"
+         ry="0.29208049"
+         id="prim_middle_left"
+         style="opacity:1;fill:rgba(0,0,0,0.1);"
+         transform="rotate(45)">
+         <animate attributeName="fill"
+            begin="1.3s;op.end+0.3s"
+            dur="0.6s"
+            values="rgba(0,0,0,0.1); rgba(0,0,0,0.3); rgba(0,0,0,0.1);"
+            repeatCount="1"/>
+      </rect>
+      <rect
+         width="2.5861259"
+         height="2.5861259"
+         x="143.09392"
+         y="113.61168"
+         rx="0.37781489"
+         id="prim_middle_center"
+         style="opacity:1;fill:rgba(0,0,0,0.1);"
+         ry="0.37781489">
+         <animate id="op" attributeName="fill"
+            begin="1.9s;op.end+0.9s"
+            dur="0.5s"
+            values="rgba(0,0,0,0.1); rgba(0,0,0,0.3); rgba(0,0,0,0.1);"
+            repeatCount="1"/>
+      </rect>
+      <circle
+         cx="148.3416"
+         cy="114.90474"
+         id="prim_middle_right"
+         style="opacity:1;fill:rgba(0,0,0,0.1);"
+         r="1.2930629">
+         <animate attributeName="fill"
+            begin="1.7s;op.end+0.7s"
+            dur="0.6s"
+            values="rgba(0,0,0,0.1); rgba(0,0,0,0.3); rgba(0,0,0,0.1);"
+            repeatCount="1"/>
+      </circle>
+      <circle
+         r="1.2930629"
+         cy="118.85941"
+         cx="140.43236"
+         id="prim_bottom_left"
+         style="opacity:1;fill:rgba(0,0,0,0.1);">
+         <animate attributeName="fill"
+            begin="1.2s;op.end+0.2s"
+            dur="0.6s"
+            values="rgba(0,0,0,0.1); rgba(0,0,0,0.3); rgba(0,0,0,0.1);"
+            repeatCount="1"/>
+      </circle>
+      <rect
+         transform="rotate(45)"
+         ry="0.29208049"
+         rx="0.29208049"
+         y="-19.050392"
+         x="185.14366"
+         height="1.9992782"
+         width="1.9992782"
+         id="prim_bottom_center"
+         style="opacity:1;fill:rgba(0,0,0,0.1);">
+         <animate attributeName="fill"
+            begin="1.1s;op.end+0.1s"
+            dur="0.6s"
+            values="rgba(0,0,0,0.1); rgba(0,0,0,0.3); rgba(0,0,0,0.1);"
+            repeatCount="1"/>
+      </rect>
+      <rect
+         ry="0.37781492"
+         rx="0.37781492"
+         y="117.56633"
+         x="147.04854"
+         height="2.5861259"
+         width="2.5861259"
+         id="prim_bottom_right"
+         style="opacity:1;fill:rgba(0,0,0,0.1);">
+         <animate attributeName="fill"
+            begin="1s;op.end"
+            dur="0.6s"
+            values="rgba(0,0,0,0.1); rgba(0,0,0,0.3); rgba(0,0,0,0.1);"
+            repeatCount="1"/>
+      </rect>
+   </g>
+</svg>
