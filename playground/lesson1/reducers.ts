@@ -4,7 +4,10 @@ import { ActionType as GeneralAction } from "../actions";
 
 const REGEX_DOMAIN_NAME = /const\s*DOMAIN_NAME_REQUEST:\s*(?<type>.+?)\s*=\s*b"(?<name>.*)";/;
 
-export const wrapFullDemoReducer = (primaryReducer) => (state = {}, action) => {
+export const wrapFullDemoReducer = (primaryReducer) => (
+  state: any = {},
+  action
+) => {
   if (action.type == ActionType.ApplyDnsRequest) {
     // transform code to set the domain name
     state.code.current = state.code.current.replace(

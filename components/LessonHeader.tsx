@@ -16,15 +16,17 @@ const LessonHeader: React.FunctionComponent<LessonHeaderProps> = (
     <div id="module_header" className="row no-gutters">
       <div className="col-10 offset-1">
         <h2>
-          <a className="back-link" href="/">
+          <a href="/" className="back-link">
             &lt;
           </a>
-          &nbsp;{props.module}
-          {props.badges?.map((badge) => (
-            <span key={badge} className="module_badge beginner_badge">
-              {badge}
-            </span>
-          ))}
+          &nbsp;<span className="pre-badge-header">{props.module}</span>
+          <div className="badges">
+            {props.badges?.map((badge) => (
+              <span key={badge} className="module-badge">
+                {badge}
+              </span>
+            ))}
+          </div>
         </h2>
         <h1 id="lesson-header">{props.title}</h1>
       </div>

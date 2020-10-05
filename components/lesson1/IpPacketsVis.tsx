@@ -3,7 +3,7 @@ import React, {
   useCallback,
   useEffect,
   useRef,
-  Fragment,
+  MutableRefObject,
 } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import HexEditor from "react-hex-editor";
@@ -28,6 +28,7 @@ import {
   usePlaygroundSelector,
 } from "../../playground/Playground";
 import SimplePane from "../../playground/Output/SimplePane";
+import { HexEditorHandle } from "react-hex-editor/dist/types";
 
 export interface PacketTableVisProps {
   /**
@@ -46,7 +47,7 @@ export const VisIpPacketHeader: React.FunctionComponent<PacketTableVisProps> = (
   const highlight = props.highlight;
   const packet = props.packet;
   return (
-    <Fragment>
+    <>
       <tr>
         <td className="active" onMouseOver={highlight("version")}>
           Version: {packet.ip.version}
@@ -102,7 +103,7 @@ export const VisIpPacketHeader: React.FunctionComponent<PacketTableVisProps> = (
           Destination IP address: {packet.ip.destinationIp}
         </td>
       </tr>
-    </Fragment>
+    </>
   );
 };
 
@@ -159,7 +160,7 @@ export const VisPacketHeader: React.FunctionComponent<VisPacketHeaderProps> = (
 };
 
 export const IpPacketsVis: React.FunctionComponent = (props) => {
-  const hexEditorRef = useRef();
+  const hexEditorRef: MutableRefObject<HexEditorHandle> = useRef();
   const dispatch = useDispatch();
   const { playgroundId } = useContext(PlaygroundContext);
 

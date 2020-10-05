@@ -1,4 +1,4 @@
-import React, { useRef, useContext, useEffect } from "react";
+import React, { useRef, useContext, useEffect, MutableRefObject } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import HexEditor from "react-hex-editor";
 
@@ -27,6 +27,7 @@ import {
 import SimplePane from "../../playground/Output/SimplePane";
 import { LOW_LVL_THEME } from "../network/ThemedHexViewer";
 import { evalUdpDatagramWasm } from "../../playground/lesson1/wasm";
+import { HexEditorHandle } from "react-hex-editor/dist/types";
 
 export const VisUdpPacketHeader: React.FunctionComponent<PacketTableVisProps> = (
   props
@@ -72,7 +73,7 @@ export const VisUdpPacketHeader: React.FunctionComponent<PacketTableVisProps> = 
 };
 
 export const UdpDatagramVis: React.FunctionComponent = (props) => {
-  const hexEditorRef = useRef();
+  const hexEditorRef: MutableRefObject<HexEditorHandle> = useRef();
   const dispatch = useDispatch();
   const { playgroundId } = useContext(PlaygroundContext);
 

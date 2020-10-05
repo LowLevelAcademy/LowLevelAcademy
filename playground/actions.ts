@@ -11,10 +11,12 @@ import { selectPlayground } from './selectors';
 import { CodeWrapperFunction } from './Playground';
 
 const routes = {
-  compile: { pathname: 'http://localhost:8000/compile' },
+  compile: { pathname: '/compile' },
 };
 
-type ThunkAction<T = void> = ReduxThunkAction<T, State, unknown, Action>;
+type ThunkAction<T = void> = ReduxThunkAction<T, State, unknown, any>;
+// FIXME: we temporarily use `any` in place of `Action` here    ^^^^^  because there's no
+// easy way to define `Action` types across multiple modules.
 
 const createAction = <T extends string, P extends unknown>(type: T, props?: P) => (
   Object.assign({ type }, props)
@@ -157,6 +159,9 @@ export function indexPageLoad({
   };
 }
 
+// Action wrapper for a playground.
+export type PlaygroundAction = { playgroundId: string, type: string, action: Action };
+
 export type Action =
   | ReturnType<typeof requestCompile>
   | ReturnType<typeof receiveCompileSuccess>
@@ -167,6 +172,6 @@ export type Action =
   | ReturnType<typeof addImport>
   | ReturnType<typeof gotoPosition>
   | ReturnType<typeof selectText>
-  | ReturnType<typeof createPlaygroundAction>
+  | ReturnType<typeof switchLessonPage>
   | ReturnType<typeof sendNetworkFrame>
   ;

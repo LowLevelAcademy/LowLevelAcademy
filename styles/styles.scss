@@ -128,32 +128,39 @@ h2 {
   color: $color-accent;
 }
 
-.module_badge {
+div.badges {
+  display: inline-block;
+}
+
+.module-badge {
   color: $color-dark;
   display: inline-block;
   border-radius: 8px;
+  border: 3px $color-light-dark solid;
   padding: 4px 14px 4px 14px;
   font-size: 15px;
   font-weight: bold;
   text-align: center;
   vertical-align: middle;
-  margin-left: 20px;
+  margin-left: 10px;
   display: inline-block;
   margin-bottom: 5px;
+}
+.module-badge:first-of-type {
+  margin-left: 0px;
 }
 #module_header,
 #lesson_header {
   margin-bottom: 60px;
 }
-#module_contents {
-  margin-bottom: 80px;
+#module_header h1 > span {
+  white-space: nowrap;
+}
+.pre-badge-header {
+  margin-right: 25px;
 }
 #module_contents > div {
   padding: 3px;
-}
-
-.beginner_badge {
-  border: 3px $color-accent solid;
 }
 
 .module_tile {
@@ -248,9 +255,6 @@ ul.contacts_and_social a {
   opacity: 1;
   transition: 0.2s ease-in-out;
 }
-.emailicon {
-  margin-right: 24px;
-}
 .footer_links a {
   color: white;
   opacity: 0.7;
@@ -265,16 +269,21 @@ ul.contacts_and_social a {
   font-size: 80%;
 }
 
+#footer-fundraise {
+  margin-top: 80px;
+}
+
 /* IE8 */
 .is-last-step:after {
   display: none !important;
 }
 
-span.dashed-message {
+.dashed-message {
+  display: inline-block;
   padding: 10px 20px 10px 20px;
   border-radius: 10px;
   border: 1px dashed #cbcbcb;
-  margin-top: 10px;
+  margin-top: 15px;
 }
 
 a[rel="license"] {
@@ -343,26 +352,34 @@ input[type="color"]:focus,
   background-color: #199e58;
 }
 
-.about-description {
-  padding-right: 15%;
+#opensource .about-description {
+  padding-right: 5%;
 }
 
-.about-description p {
+.about-description p,
+#team .row p {
   color: $color-light-dark;
+}
+
+.about_introduction {
+  margin-bottom: 50px;
 }
 
 #team img {
   width: 100%;
+  margin-bottom: 14px;
 }
 
 #opensource img {
   width: 100%;
+  max-width: 75px;
+  min-width: 60px;
 }
 
 #team > div > .row,
 #opensource > div > .row {
-  margin-top: 60px;
-  margin-bottom: 85px;
+  margin-top: 50px;
+  margin-bottom: 70px;
 }
 
 #team > div > .row .row,
@@ -371,9 +388,32 @@ input[type="color"]:focus,
   margin-bottom: 15px;
 }
 
+#team h3,
+#team p {
+  width: 100%;
+}
+
 .teammember-social {
+  position: absolute;
+  margin-left: 16px;
+  margin-top: 5px;
   list-style-type: none;
   padding: 0;
+}
+.teammember-social::before {
+  content: "";
+  position: absolute;
+  background-color: $color-dark;
+  border-radius: 16px;
+  left: -10px;
+  right: -2px;
+  top: 2px;
+  bottom: -4px;
+  opacity: 0.1;
+}
+.teammember-social:hover:before {
+  opacity: 0.5;
+  transition: 0.2s ease-in;
 }
 
 .team-social-icon {
@@ -381,26 +421,26 @@ input[type="color"]:focus,
   display: inline-block;
   background-size: contain;
   background-repeat: no-repeat;
-  width: 28px;
-  height: 28px;
+  width: 24px;
+  height: 24px;
   margin-right: 8px;
-  opacity: 0.7;
+  opacity: 0.9;
 }
 .tsi-facebook {
   background-image: url(/images/icons/facebook_outline_color.svg);
 }
 .tsi-instagram {
-  background-image: url(/images/icons/instagram_outline_color.svg);
+  background-image: url(/images/icons/instagram_outline_white.svg);
 }
 .tsi-twitter {
   margin-top: 4px;
-  background-image: url(/images/icons/twitter_outline_color.svg);
+  background-image: url(/images/icons/twitter_outline_white.svg);
 }
 .tsi-telegram {
-  background-image: url(/images/icons/telegram_outline_color.svg);
+  background-image: url(/images/icons/telegram_outline_white.svg);
 }
 .tsi-github {
-  background-image: url(/images/icons/github-round_dark.svg);
+  background-image: url(/images/icons/github_white.svg);
 }
 
 /* < xl */

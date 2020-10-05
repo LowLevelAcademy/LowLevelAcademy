@@ -5,6 +5,7 @@ node_modules
 .next/
 .cache/
 .vscode/
+out/
 *.html
 package-lock.json
 yarn.lock

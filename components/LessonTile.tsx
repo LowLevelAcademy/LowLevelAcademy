@@ -1,7 +1,6 @@
 // Represents a single lesson in the module list.
 
 import React, { PropsWithChildren } from "react";
-import Link from "next/link";
 
 export interface LessonTileProps {
   // Optional link to the lesson page.
@@ -40,9 +39,9 @@ const LessonTile: React.FunctionComponent<ComponentProps> = (
   );
   if (props.href) {
     lessonTile = (
-      <Link href={props.href}>
-        <a className="undecorated">{lessonTile}</a>
-      </Link>
+      <a href={props.href} className="undecorated">
+        {lessonTile}
+      </a>
     );
   }
   return <div className="col-12 col-md-6 col-xl-4">{lessonTile}</div>;

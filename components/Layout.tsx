@@ -1,6 +1,5 @@
 import React from "react";
 import Head from "next/head";
-import Link from "next/link";
 
 const Layout: React.FunctionComponent = ({ children }) => {
   return (
@@ -31,30 +30,6 @@ const Layout: React.FunctionComponent = ({ children }) => {
           type="application/rss+xml"
           href="https://lowlvl.org/updates.xml"
         />
-
-        <meta property="og:title" content="Low-Level Academy" />
-        <meta
-          property="og:description"
-          content="Learn systems programming by creating small projects from the first principles with visual and intuitive explanations."
-        />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://lowlvl.org" />
-        <meta property="og:locale" content="en_US" />
-        <meta property="og:image" content="/images/og_logo.jpg" />
-        <meta property="og:image:width" content="600" />
-        <meta property="og:image:height" content="600" />
-        <meta name="twitter:card" content="summary" />
-        <meta name="twitter:image" content="/images/og_logo.jpg" />
-        <meta name="twitter:site" content="@LowLevelAcademy" />
-        <meta name="twitter:creator" content="@LowLevelAcademy" />
-        <meta
-          name="twitter:title"
-          content="Low-Level Academy - explorable systems programming"
-        />
-        <meta
-          name="twitter:description"
-          content="Learn systems programming by creating small projects from the first principles with visual and intuitive explanations."
-        />
       </Head>
       <div>
         <div className="container-fluid no-padding" id="content-container">
@@ -82,8 +57,7 @@ const Layout: React.FunctionComponent = ({ children }) => {
                   <li>
                     <a href="mailto:nikita.baksalyar@gmail.com">
                       <img
-                        className="emailicon"
-                        src="/images/icons/email-mail-sent_white.svg"
+                        src="/images/icons/email-round_white.svg"
                         alt="Email icon"
                       />
                     </a>
@@ -109,9 +83,10 @@ const Layout: React.FunctionComponent = ({ children }) => {
               <div className="col-10 text-left offset-1 offset-lg-0 text-lg-right col-lg-7">
                 <ul className="footer_links">
                   <li>
-                    <Link href="/privacy" prefetch={false}>
-                      <a>Privacy&nbsp;Policy</a>
-                    </Link>
+                    <a href="/privacy">Privacy&nbsp;Policy</a>
+                  </li>
+                  <li>
+                    <a href="/about">About</a>
                   </li>
                 </ul>
                 <span>

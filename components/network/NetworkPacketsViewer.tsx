@@ -1,14 +1,15 @@
 // Component to visualize a list of network packets with a contents viewer.
 
-import React, { Fragment } from "react";
+import React, { Fragment, MutableRefObject } from "react";
 import HexEditor from "react-hex-editor";
+import { HexEditorHandle } from "react-hex-editor/dist/types";
 
 import { LOW_LVL_THEME } from "../../components/network/ThemedHexViewer";
 import { NetworkPackets } from "./NetworkPacketsTree";
 
 export const NetworkPacketsViewer: React.FunctionComponent<any> = (props) => {
   const [selectedPacket, setSelectedPacket] = React.useState(0);
-  const hexEditorRef = React.useRef();
+  const hexEditorRef: MutableRefObject<HexEditorHandle> = React.useRef();
 
   let sentPackets = props.packets;
 

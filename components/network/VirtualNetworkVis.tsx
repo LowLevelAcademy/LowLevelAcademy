@@ -366,6 +366,19 @@ const VNetVisualize: React.ForwardRefRenderFunction<
     },
   }));
 
+  const resized = () => {
+    // Reinitialize Zdog if the canvas element is resized.
+    if (vnetState.current.illo) {
+      vnetState.current.illo.updateRenderGraph();
+    }
+  };
+
+  React.useEffect(() => {
+    const currentCanvas = canvasRef.current;
+    window.addEventListener("resize", resized);
+    return () => window.removeEventListener("resize", resized);
+  });
+
   useEffect(() => {
     if (canvasRef.current && canvasRef.current.offsetParent != null) {
       // make sure the canvas element is visible before we start rendering it.
