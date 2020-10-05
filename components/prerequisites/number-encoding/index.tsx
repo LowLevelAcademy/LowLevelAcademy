@@ -1,13 +1,13 @@
 // This module contains components that are used for representing numbers in different number systems.
 
-import React, { FunctionComponent, useState } from "react";
+import React, { useState } from "react";
 import styles from "./index.module.scss";
 
 interface NumberProps {
   className: string;
 }
 
-const Number: FunctionComponent<NumberProps> = (props) => (
+const Number: React.FC<NumberProps> = (props) => (
   <span className={props.className}>{props.children}</span>
 );
 
