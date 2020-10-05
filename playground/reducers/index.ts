@@ -1,4 +1,4 @@
-import { Action, ActionType } from "../actions";
+import { Action, ActionType, PlaygroundAction } from "../actions";
 import { combineReducers } from "redux";
 
 import code from "./code";
@@ -39,7 +39,7 @@ export const initDefaultPlaygroundsState = (reducers) => {
 
 // Reducer to manage all playgrounds within a single lesson page.
 export default function playgrounds(playgroundsReducers) {
-  return (state = {}, playgroundAction: Action) => {
+  return (state = {}, playgroundAction: PlaygroundAction) => {
     if (
       typeof playgroundAction == "object" &&
       playgroundAction.type.startsWith(ActionType.PlaygroundAction)

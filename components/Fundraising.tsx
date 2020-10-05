@@ -1,9 +1,33 @@
 import React from "react";
 
-const Fundraising: React.FunctionComponent = () => {
+type SponsorDescription = string | Array<any>;
+
+interface FundraisingProps {
+  sponsors?: Array<SponsorDescription>;
+}
+
+const Fundraising: React.FunctionComponent<FundraisingProps> = (props) => {
+  const sponsors = props.sponsors ? (
+    <p>
+      We would like to thank our sponsors that made this lesson possible:&nbsp;
+      {props.sponsors
+        .map<React.ReactNode>((sponsor) =>
+          Array.isArray(sponsor) ? (
+            <a key={sponsor[0]} href={sponsor[1]}>
+              {sponsor[0]}
+            </a>
+          ) : (
+            sponsor
+          )
+        )
+        .reduce((prev, elem) => [prev, ", ", elem])}
+    </p>
+  ) : null;
+
   return (
     <div id="footer-fundraise" className="row no-gutters">
       <div className="col-12 text-center">
+        {sponsors}
         <p>
           Please{" "}
           <a href="https://github.com/sponsors/nbaksalyar">become a sponsor</a>{" "}

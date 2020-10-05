@@ -1,0 +1,84 @@
+import { NextSeo } from "next-seo";
+import Fundraising from "../Fundraising";
+import {
+  Dec,
+  Bin,
+  Hex,
+  Oct,
+  UtfPlayground,
+  DecimalPlayground,
+  OctalPlayground,
+  BinaryPlayground,
+  HexPlayground,
+} from "./number-encoding";
+
+<NextSeo
+  description="Learn how to work with binary and hexadecimal numbers."
+  openGraph={{
+    title: "Number Encoding - Low-Level Academy",
+    description: "Learn how to work with binary and hexadecimal numbers.",
+  }}
+/>
+
+Every piece of information that is stored in computers is encoded in numbers.
+
+The sentence you're reading now is also just a sequence of numbers: each letter of the alphabet
+has a corresponding numeric code, so the word "hello" is represented with five numbers: <Dec>104</Dec>, <Dec>101</Dec>, <Dec>108</Dec>, <Dec>108</Dec>, <Dec>111</Dec>.
+
+We use a standard encoding scheme that is called UTF-8, which can represent a lot of characters,
+including symbols, characters from all sorts of languages, and emojis. Other encoding systems exist,
+but UTF-8 is most commonly used today.
+
+Give it a try and see how each letter turns into a number:
+
+<UtfPlayground base={10} />
+
+## Decimal and Binary
+
+In our everyday life, we use _decimal_ numbers, which are based on the number 10: we count in tens, hundreds, thousands, and so forth.
+This way, we count physical things: one tree, two apples, ten fingers.
+But the same quantities can be represented using different notations and with other numerical systems.
+For instance, sometimes we use Roman numerals: I, II, III, IV, X.
+These are not particularly practical if we need to deal with larger numbers, though—and likewise,
+decimal numbers are not always practical when we deal with computers and data.
+
+<DecimalPlayground>
+  Computers use the <em>binary</em> number system which, fundamentally, is not
+  different from other number systems. To understand how these systems are
+  related, let's take a decimal number:&nbsp;
+</DecimalPlayground>
+
+Notice how we exponentiate the number <Dec>10</Dec>: it's our _number base_, or _radix_, which can be seen as the number of
+digits that we can use for counting, starting with zero. For example, base <Dec>10</Dec> has 10 digits from <Dec>0</Dec> to <Dec>9</Dec>,
+base <Dec>8</Dec> has 8 digits from <Oct>0</Oct> to <Oct>7</Oct>, and base <Dec>2</Dec> has only two digits: <Bin>0</Bin> and <Bin>1</Bin>. An exponent can also be seen as a digit's place.
+If we take a number like <Dec>500</Dec>, it has 3 digits: <Dec>5</Dec>, <Dec>0</Dec>, and <Dec>0</Dec>.<br/><Dec>5</Dec> is the _3<sup>rd</sup>_ digit from the right, so
+we take <Dec>10</Dec> to the power of <Dec>3</Dec> and multiply by the digit <Dec>5</Dec>, i.e.: <Dec>10<sup>3</sup></Dec> × <Dec>5</Dec> = <Dec>500</Dec>.
+
+Something fun happens when we change the number base and follow the same principle of summing exponents.
+Let's see how it works in base `8`:
+
+<OctalPlayground />
+
+<BinaryPlayground />
+
+## Hexadecimal
+
+But what about the number systems where we have more than 10 digits? Like, for example, _hexadecimal_, or the number base 16.
+When we run out of digits, we can start using letters instead: for example, the hexadecimal digit <Hex>A</Hex> is equal to decimal <Dec>10</Dec>, and
+the digit <Hex>B</Hex> is the same thing as <Dec>11</Dec>, and it goes up to <Hex>F</Hex>.
+
+<HexPlayground />
+
+We use the hexadecimal number system in computing because it has a neat property: we can represent a single _byte_ (a number between <Dec>0</Dec>
+and <Dec>255</Dec>, or 2<sup>8</sup>) with just 2 hexadecimal digits. This allows us to build neat grids, or _hex views_,
+to represent data as sequences of hexadecimal numbers.
+
+Let's get back to that text encoding example, but this time let’s use hexadecimal encoding:
+
+<UtfPlayground base={16} />
+
+## Takeaways
+
+By their very nature as digital machines, computers only deal with ones and zeros. Through text encoding and base changes,
+computers can deal with the letters and numbers that humans use every day. Now that you know how some basic data is encoded
+“on the wire”, you’ll be ready to learn more about networking and low-level programming.

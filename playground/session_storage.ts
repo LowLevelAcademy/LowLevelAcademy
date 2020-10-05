@@ -7,7 +7,7 @@ import storage from "./storage";
 
 const CURRENT_VERSION = 1;
 
-export function serialize(state: State): string {
+export function serialize(state: any): string {
   return JSON.stringify({
     version: CURRENT_VERSION,
     lesson1: {

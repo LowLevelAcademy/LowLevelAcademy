@@ -11,9 +11,11 @@ export default function ModulePage() {
         <div className="col-10 offset-1">
           <h2>Network Programming</h2>
           <h1>
-            TCP/IP Fundamentals
-            <span className="module_badge beginner_badge">Beginner</span>
-            <span className="module_badge beginner_badge">Rust</span>
+            <span className="pre-badge-header">TCP/IP Fundamentals</span>
+            <div className="badges">
+              <span className="module-badge">Beginner</span>
+              <span className="module-badge">Rust</span>
+            </div>
           </h1>
         </div>
         <div className="col-12 module-animation">
@@ -39,6 +41,13 @@ export default function ModulePage() {
         <div className="row no-gutters">
           <div className="col-10 offset-1">
             <div id="module_contents" className="row no-gutters">
+              <LessonTile
+                href="prerequisites/binary-and-hexadecimal-numbers"
+                title="Number Encoding"
+                icon="prereq_number_encoding_grey.svg"
+              >
+                Learn how to work with binary and hexadecimal numbers.
+              </LessonTile>
               <LessonTile
                 href="/tcp-ip-fundamentals/exchanging-messages"
                 title="Exchanging Messages"

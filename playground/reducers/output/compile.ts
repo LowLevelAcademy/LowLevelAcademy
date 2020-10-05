@@ -31,8 +31,8 @@ export default function compile(state = DEFAULT, action: Action) {
       return start(state, state);
 
     case ActionType.CompileSucceeded: {
-      const { body = null, lineOffset = 0, results = {} } = action;
-      return finish(state, { body, lineOffset, results, error: null });
+      const { body = null, lineOffset = 0 } = action;
+      return finish(state, { body, lineOffset, results: {}, error: null });
     }
 
     case ActionType.CompileFailed: {

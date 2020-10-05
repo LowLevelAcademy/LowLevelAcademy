@@ -1,0 +1,88 @@
+@import "../../../styles/colors.scss";
+
+.textInput {
+  letter-spacing: 3px;
+  height: 200px;
+  font-size: 85%;
+}
+
+.numbersEncoding {
+  display: block;
+  position: relative;
+  font-size: 80%;
+  padding: 0.375rem 0.75rem;
+  word-spacing: 0.375rem;
+}
+
+.utfPlayground {
+  margin-bottom: 15px;
+}
+
+.decimal,
+.octal,
+.binary,
+.hexadecimal {
+  & > input {
+    border: none;
+    width: auto;
+    display: inline-block;
+    border-bottom: 1px dotted $color-green;
+    text-align: center;
+    font-weight: bold;
+  }
+}
+
+.decimal {
+  color: $color-green;
+  font-weight: bold;
+
+  & > input {
+    color: $color-green;
+    border-bottom-color: $color-green;
+  }
+}
+
+.hexadecimal {
+  color: $color-red;
+  font-weight: bold;
+
+  & > input {
+    color: $color-red;
+    border-bottom-color: $color-red;
+  }
+}
+
+.octal {
+  color: $color-blue;
+  font-weight: bold;
+
+  & > input {
+    color: $color-blue;
+    border-bottom-color: $color-blue;
+  }
+}
+
+.binary {
+  color: $color-pink;
+  font-weight: bold;
+
+  & > input {
+    color: $color-pink;
+    border-bottom-color: $color-pink;
+  }
+}
+
+// Display a list of exponents
+.exponents {
+  font-size: 85%;
+  padding: 0;
+  margin: 0 0 1rem 0;
+
+  & > li {
+    list-style: none;
+
+    & > em {
+      color: $color-light-dark;
+    }
+  }
+}

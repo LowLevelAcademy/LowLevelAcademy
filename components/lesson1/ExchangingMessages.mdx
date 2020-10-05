@@ -1,5 +1,15 @@
+import { NextSeo } from "next-seo";
 import { wrapFullDemoCode } from "../../playground/lesson1/rust";
 import { DnsRequestForm, Playground, FullDemoVis } from "./DynamicContents";
+
+<NextSeo
+  description="Introduction to UDP: sockets, frames, and data encoding. We build a Rust client for a simple name server that converts domain names into IP addresses."
+  openGraph={{
+    title: "Exchanging UDP messages - Low-Level Academy",
+    description:
+      "Introduction to UDP: sockets, frames, and data encoding. We build a Rust client for a simple name server that converts domain names into IP addresses.",
+  }}
+/>
 
 When you opened this page in your web browser, your computer exchanged data with quite a few servers on the internet,
 almost unnoticeably to you. In this lesson, we’ll build a network client application, which does something similar to

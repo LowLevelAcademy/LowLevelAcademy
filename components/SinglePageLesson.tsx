@@ -1,16 +1,20 @@
 import React, { PropsWithChildren } from "react";
-import Fundraising from "./Fundraising";
+import { NextSeo } from "next-seo";
 
+import Fundraising from "./Fundraising";
 import LessonHeader from "./LessonHeader";
 import NoScriptBar from "./NoScriptBar";
 import Page from "./Page";
 
 export interface LessonProps {
-  // Unit that this lesson belongs to
+  // Module that this lesson belongs to
   module: string;
-  // Title of the single page
+  // Title of the single page.
   pageTitle: string;
+  // Badges ('Beginner', 'Rust', etc.).
   badges?: Array<string>;
+  // Sponsors for this lesson.
+  sponsors?: Array<string | Array<any>>;
 }
 
 const SinglePageLesson: React.FunctionComponent<PropsWithChildren<
@@ -18,6 +22,7 @@ const SinglePageLesson: React.FunctionComponent<PropsWithChildren<
 >> = (props: PropsWithChildren<LessonProps>) => {
   return (
     <>
+      <NextSeo title={props.pageTitle + " - Low-Level Academy"} />
       <LessonHeader
         module={props.module}
         title={props.pageTitle}
@@ -27,7 +32,7 @@ const SinglePageLesson: React.FunctionComponent<PropsWithChildren<
       <Page title={props.pageTitle} isCurrent={true}>
         {props.children}
       </Page>
-      <Fundraising />
+      <Fundraising sponsors={props.sponsors} />
     </>
   );
 };

@@ -1,7 +1,6 @@
-// fixme: import from colors.scss
-$rust: #39be78;
-$red: #be5739;
-$selected-radio: desaturate(lighten($rust, 30%), 20%);
+@import "./colors.scss";
+
+$selected-radio: desaturate(lighten($color-accent, 30%), 20%);
 $unselected-radio: lighten($selected-radio, 20%);
 $grey: #dfe3e4;
 $dark-grey: #666;
@@ -293,12 +292,12 @@ $header-transition: 0.2s ease-in-out;
     }
 
     &--build {
-      $rust-dark: darken($rust, 5%);
+      $dark-accent: darken($color-accent, 5%);
 
-      background: $rust;
+      background: $color-accent;
       color: white;
 
-      border-color: darken($rust, 5%);
+      border-color: $dark-accent;
 
       &:not(:last-child) {
         // Silly specificity
@@ -310,14 +309,14 @@ $header-transition: 0.2s ease-in-out;
       }
 
       &:hover {
-        background: $rust-dark;
+        background: $dark-accent;
         color: white;
       }
 
       &:active {
-        background: $rust-dark;
-        border-top-color: $rust-dark;
-        border-bottom-color: $rust-dark;
+        background: $dark-accent;
+        border-top-color: $dark-accent;
+        border-bottom-color: $dark-accent;
       }
     }
   }
@@ -533,11 +532,11 @@ table.ip-packet-vis {
   }
 
   & > li.completed {
-    color: $rust;
+    color: $color-accent;
   }
 
   & > li.failed {
-    color: $red;
+    color: $color-red;
   }
 
   .icon-inline {

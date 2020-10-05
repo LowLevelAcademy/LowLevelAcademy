@@ -2,29 +2,40 @@
 // preserved between completely independent sessions of the
 // playground.
 
-import State from './state';
-import storage from './storage';
+import State from "./state";
+import storage from "./storage";
 
 const CURRENT_VERSION = 1;
 
-export function serialize(state: State) {
+export function serialize(state: any) {
   return JSON.stringify({
     version: CURRENT_VERSION,
     lesson1: {
-      playgrounds: Object.keys(state.playgrounds).reduce((res, playgroundId) => {
-        res[playgroundId] = { code: { current: state.playgrounds[playgroundId].code.current } };
-        return res;
-      }, {}),
+      playgrounds: Object.keys(state.playgrounds).reduce(
+        (res, playgroundId) => {
+          res[playgroundId] = {
+            code: { current: state.playgrounds[playgroundId].code.current },
+          };
+          return res;
+        },
+        {}
+      ),
       navigation: state.navigation,
-    }
+    },
   });
 }
 
 export function deserialize(savedState) {
-  if (!savedState) { return undefined; }
+  if (!savedState) {
+    return undefined;
+  }
   const parsedState = JSON.parse(savedState);
-  if (!parsedState) { return undefined; }
-  if (parsedState.version !== CURRENT_VERSION) { return undefined; }
+  if (!parsedState) {
+    return undefined;
+  }
+  if (parsedState.version !== CURRENT_VERSION) {
+    return undefined;
+  }
 
   // This assumes that the keys we serialize with match the keys in the
   // live state. If that's no longer true, an additional renaming step

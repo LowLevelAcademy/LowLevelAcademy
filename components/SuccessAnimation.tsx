@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { MutableRefObject, useEffect, useRef } from "react";
 import Zdog from "zdog";
 
 const TAU = Zdog.TAU;
@@ -120,20 +120,20 @@ export enum SuccessAnimationState {
 }
 
 export const SuccessAnimation = (props) => {
-  const canvasRef = useRef();
-  const containerRef = useRef();
+  const canvasRef: MutableRefObject<HTMLCanvasElement> = useRef();
+  const containerRef: MutableRefObject<HTMLDivElement> = useRef();
 
   const animState = props.state;
 
   useEffect(() => {
     if (animState == SuccessAnimationState.Playing && canvasRef.current) {
-      containerRef.current.style.opacity = 1.0;
+      containerRef.current.style.opacity = "1.0";
       triggerAnimation(canvasRef.current);
     } else if (
       animState == SuccessAnimationState.Dismiss &&
       containerRef.current
     ) {
-      containerRef.current.style.opacity = 0.0;
+      containerRef.current.style.opacity = "0.0";
     }
   }, [canvasRef, animState]);
 

@@ -1,16 +1,16 @@
 import { createSelector } from "reselect";
 
-import { State } from "../reducers";
-
-const getOutput = (state: State) => state.output.compile;
+const getOutput = (state: any) => state.output.compile;
 
 const REGEX_ERR_REF = /input.rs:(?<line>\d+):(?<col>\d+)/g;
 const REGEX_ERR_LINE_NUMS = /^(?<line>\d+)(?<spaces>\s*)\|/gm;
 
-export const selectPlayground = (state: State, playgroundId) =>
+// Returns a given playground state from the store.
+export const selectPlayground = (state: any, playgroundId) =>
   state.playgrounds[playgroundId];
 
-export const selectCompileResults = (state: State, playgroundId) =>
+// Returns results from a WebAssembly function execution.
+export const selectCompileResults = (state: any, playgroundId) =>
   selectPlayground(state, playgroundId).output.compile?.results;
 
 // format Rust errors and translate line numbers for user's code

@@ -6,6 +6,13 @@
                 <link>https://lowlvl.org</link>
                 <atom:link href="https://lowlvl.org/updates.xml" rel="self" type="application/rss+xml" />
                 <item>
+                        <title>Prerequisites: Number Encoding</title>
+                        <description>How to work with binary and hexadecimal numbers.</description>
+                        <pubDate>Wed, 5 Oct 2020 09:00:00 GMT</pubDate>
+                        <link>https://lowlvl.org/prerequisites/binary-and-hexadecimal-numbers</link>
+                        <guid isPermaLink="true">https://lowlvl.org/prerequisites/binary-and-hexadecimal-numbers</guid>
+                </item>
+                <item>
                         <title>Exchanging Messages</title>
                         <description>Introduction to UDP: sockets, frames, and data encoding. We build a client for a simple name server that converts domain names into IP addresses.</description>
                         <pubDate>Wed, 16 Sep 2020 09:00:00 GMT</pubDate>
