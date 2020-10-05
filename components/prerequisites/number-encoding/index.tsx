@@ -3,14 +3,6 @@
 import React, { useState } from "react";
 import styles from "./index.module.scss";
 
-interface NumberProps {
-  className: string;
-}
-
-const Number: React.FC<NumberProps> = (props) => (
-  <span className={props.className}>{props.children}</span>
-);
-
 // Component that allows to input only numeric values.
 const NumericInput = (props) => (
   <input
@@ -31,7 +23,7 @@ const NumericInput = (props) => (
 
 // Represents a decimal number
 export const Dec = (props) => (
-  <Number className={styles.decimal}>{props.children}</Number>
+  <span className={styles.decimal}>{props.children}</span>
 );
 
 const DecInput = (props) => (
@@ -42,10 +34,10 @@ const DecInput = (props) => (
 
 // Represents a hex number
 export const Hex = (props) => (
-  <Number className={styles.hexadecimal}>
+  <span className={styles.hexadecimal}>
     {props.children}
     <sup>&nbsp;hex</sup>
-  </Number>
+  </span>
 );
 
 const HexInput = (props) => (
@@ -56,10 +48,10 @@ const HexInput = (props) => (
 
 // Represents an octal number
 export const Oct = (props) => (
-  <Number className={styles.octal}>
+  <span className={styles.octal}>
     {props.children}
     <sup>&nbsp;oct</sup>
-  </Number>
+  </span>
 );
 
 const OctInput = (props) => (
@@ -70,10 +62,10 @@ const OctInput = (props) => (
 
 // Represents a binary number
 export const Bin = (props) => (
-  <Number className={styles.binary}>
+  <span className={styles.binary}>
     {props.children}
     <sup>&nbsp;bin</sup>
-  </Number>
+  </span>
 );
 
 const BinInput = (props) => (
