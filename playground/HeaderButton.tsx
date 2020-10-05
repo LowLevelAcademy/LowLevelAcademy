@@ -5,7 +5,7 @@ interface HeaderButtonProps {
   rightIcon?: React.ReactNode;
 }
 
-const HeaderButton: React.FunctionComponent<HeaderButtonProps> = ({
+const HeaderButton: React.FC<HeaderButtonProps> = ({
   icon,
   rightIcon,
   children,

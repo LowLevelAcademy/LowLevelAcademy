@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from "react";
+import React from "react";
 
 export interface PageProps {
   // Title of the page
@@ -7,9 +7,7 @@ export interface PageProps {
   isCurrent?: boolean;
 }
 
-const Page: React.FunctionComponent<PropsWithChildren<PageProps>> = (
-  props: PropsWithChildren<PageProps>
-) => {
+const Page: React.FC<PageProps> = (props) => {
   return (
     <div
       className={`row no-gutters lesson_text lesson_page ${

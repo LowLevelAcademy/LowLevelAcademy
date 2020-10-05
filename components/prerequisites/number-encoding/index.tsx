@@ -7,9 +7,9 @@ interface NumberProps {
   className: string;
 }
 
-const Number: FunctionComponent<React.PropsWithChildren<NumberProps>> = (
-  props
-) => <span className={props.className}>{props.children}</span>;
+const Number: FunctionComponent<NumberProps> = (props) => (
+  <span className={props.className}>{props.children}</span>
+);
 
 // Component that allows to input only numeric values.
 const NumericInput = (props) => (
@@ -86,7 +86,7 @@ export interface UtfPlaygroundProps {
   base: number;
 }
 
-export const UtfPlayground: React.FunctionComponent<UtfPlaygroundProps> = (
+export const UtfPlayground: React.FC<UtfPlaygroundProps> = (
   props: UtfPlaygroundProps
 ) => {
   const [text, setText] = useState("abcdefg");
@@ -180,7 +180,7 @@ interface ExponentationProps {
   expDescription: Array<string>;
 }
 
-export const Exponentiation: React.FunctionComponent<ExponentationProps> = ({
+export const Exponentiation: React.FC<ExponentationProps> = ({
   exp,
   radix,
   expDescription,
@@ -213,7 +213,7 @@ export const Exponentiation: React.FunctionComponent<ExponentationProps> = ({
   );
 };
 
-export const BinaryPlayground: React.FunctionComponent = () => {
+export const BinaryPlayground: React.FC = () => {
   const [number, setNumber] = useState(11);
   const digits = [];
 
@@ -270,7 +270,7 @@ export const BinaryPlayground: React.FunctionComponent = () => {
   );
 };
 
-export const DecimalPlayground: React.FunctionComponent = (props) => {
+export const DecimalPlayground: React.FC = (props) => {
   const [number, setNumber] = useState(123);
   const digits = [];
 
@@ -330,7 +330,7 @@ export const DecimalPlayground: React.FunctionComponent = (props) => {
   );
 };
 
-export const OctalPlayground: React.FunctionComponent = () => {
+export const OctalPlayground: React.FC = () => {
   const [number, setNumber] = useState(0o777);
   const digits = [];
 
@@ -404,7 +404,7 @@ export const OctalPlayground: React.FunctionComponent = () => {
   );
 };
 
-export const HexPlayground: React.FunctionComponent = () => {
+export const HexPlayground: React.FC = () => {
   const [number, setNumber] = useState(0x1f);
   const digits = [];
 

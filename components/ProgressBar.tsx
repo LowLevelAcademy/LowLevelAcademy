@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from "react";
+import React from "react";
 
 export interface ProgressBarProps {
   onSwitchPage?: CallableFunction;
@@ -13,9 +13,7 @@ export interface ProgressPageProps {
   onClick?: CallableFunction;
 }
 
-export const ProgressPage: React.FunctionComponent<PropsWithChildren<
-  ProgressPageProps
->> = (props: PropsWithChildren<ProgressPageProps>) => {
+export const ProgressPage: React.FC<ProgressPageProps> = (props) => {
   const classes = [];
   props.active && classes.push("is_active");
   props.completed && classes.push("is_complete");
@@ -32,9 +30,7 @@ export const ProgressPage: React.FunctionComponent<PropsWithChildren<
   );
 };
 
-export const ProgressBar: React.FunctionComponent<PropsWithChildren<
-  ProgressBarProps
->> = (props: PropsWithChildren<ProgressBarProps>) => {
+export const ProgressBar: React.FC<ProgressBarProps> = (props) => {
   const onClick = (elem) => {
     // Switch page
     const pageNum = elem.target.attributes["data-step"].value;

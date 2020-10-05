@@ -7,7 +7,7 @@ import { HexEditorHandle } from "react-hex-editor/dist/types";
 import { LOW_LVL_THEME } from "../../components/network/ThemedHexViewer";
 import { NetworkPackets } from "./NetworkPacketsTree";
 
-export const NetworkPacketsViewer: React.FunctionComponent<any> = (props) => {
+export const NetworkPacketsViewer: React.FC<any> = (props) => {
   const [selectedPacket, setSelectedPacket] = React.useState(0);
   const hexEditorRef: MutableRefObject<HexEditorHandle> = React.useRef();
 

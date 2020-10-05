@@ -29,7 +29,7 @@ interface OutputProps {
   visRef: React.RefObject<VNetInterface>;
 }
 
-const Output: React.FunctionComponent<OutputProps> = (props) => {
+const Output: React.FC<OutputProps> = (props) => {
   const somethingToShow = usePlaygroundSelector(selectors.getSomethingToShow);
   const formattedError = usePlaygroundSelector(selectors.formatError);
   const details = usePlaygroundSelector((state) => state.output.compile);
@@ -79,7 +79,7 @@ const Output: React.FunctionComponent<OutputProps> = (props) => {
   );
 };
 
-export const FinalTestVis: React.FunctionComponent = (props) => {
+export const FinalTestVis: React.FC = () => {
   const dispatch = useDispatch();
   const { playgroundId } = useContext(PlaygroundContext);
   const sentPackets = usePlaygroundSelector(

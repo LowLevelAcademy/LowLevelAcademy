@@ -6,7 +6,7 @@ interface FundraisingProps {
   sponsors?: Array<SponsorDescription>;
 }
 
-const Fundraising: React.FunctionComponent<FundraisingProps> = (props) => {
+const Fundraising: React.FC<FundraisingProps> = (props) => {
   const sponsors = props.sponsors ? (
     <p>
       We would like to thank our sponsors that made this lesson possible:&nbsp;

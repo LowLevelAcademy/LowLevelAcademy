@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import Zdog from "zdog";
 
 const TAU = Zdog.TAU;
@@ -233,7 +233,7 @@ function animate(state: State) {
   requestAnimationFrame(animate.bind(this, state));
 }
 
-const ModuleHeaderAnimation: React.FunctionComponent = () => {
+const ModuleHeaderAnimation: React.FC = () => {
   const state: React.MutableRefObject<State> = useRef({
     illo: null,
     pausing: false,

@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useContext } from "react";
+import React, { useContext } from "react";
 import { useSelector } from "react-redux";
 
 import Editor from "./Editor";
@@ -37,9 +37,7 @@ export interface PlaygroundProps {
   codeWrapperFn?: CodeWrapperFunction;
 }
 
-export const Playground: React.FunctionComponent<PropsWithChildren<
-  PlaygroundProps
->> = (props: PropsWithChildren<PlaygroundProps>) => {
+export const Playground: React.FC<PlaygroundProps> = (props) => {
   // We initialise a context with the given ID.
   // This context is used by all the child components and by created actions.
   const { id, codeWrapperFn } = props;

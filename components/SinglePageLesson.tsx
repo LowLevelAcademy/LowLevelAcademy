@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from "react";
+import React from "react";
 import { NextSeo } from "next-seo";
 
 import Fundraising from "./Fundraising";
@@ -17,9 +17,7 @@ export interface LessonProps {
   sponsors?: Array<string | Array<any>>;
 }
 
-const SinglePageLesson: React.FunctionComponent<PropsWithChildren<
-  LessonProps
->> = (props: PropsWithChildren<LessonProps>) => {
+const SinglePageLesson: React.FC<LessonProps> = (props) => {
   return (
     <>
       <NextSeo title={props.pageTitle + " - Low-Level Academy"} />

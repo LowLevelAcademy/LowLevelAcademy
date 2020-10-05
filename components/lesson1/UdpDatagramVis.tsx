@@ -29,9 +29,7 @@ import { LOW_LVL_THEME } from "../network/ThemedHexViewer";
 import { evalUdpDatagramWasm } from "../../playground/lesson1/wasm";
 import { HexEditorHandle } from "react-hex-editor/dist/types";
 
-export const VisUdpPacketHeader: React.FunctionComponent<PacketTableVisProps> = (
-  props
-) => {
+export const VisUdpPacketHeader: React.FC<PacketTableVisProps> = (props) => {
   const highlight = props.highlight;
   const packet = props.packet;
   return (
@@ -72,7 +70,7 @@ export const VisUdpPacketHeader: React.FunctionComponent<PacketTableVisProps> = 
   );
 };
 
-export const UdpDatagramVis: React.FunctionComponent = (props) => {
+export const UdpDatagramVis: React.FC = () => {
   const hexEditorRef: MutableRefObject<HexEditorHandle> = useRef();
   const dispatch = useDispatch();
   const { playgroundId } = useContext(PlaygroundContext);

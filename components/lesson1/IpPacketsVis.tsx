@@ -41,9 +41,7 @@ export interface PacketTableVisProps {
   highlight?: (section: string) => any;
 }
 
-export const VisIpPacketHeader: React.FunctionComponent<PacketTableVisProps> = (
-  props
-) => {
+export const VisIpPacketHeader: React.FC<PacketTableVisProps> = (props) => {
   const highlight = props.highlight;
   const packet = props.packet;
   return (
@@ -118,9 +116,7 @@ export interface VisPacketHeaderProps {
   onHighlightSection: (section: string) => void;
 }
 
-export const VisPacketHeader: React.FunctionComponent<VisPacketHeaderProps> = (
-  props
-) => {
+export const VisPacketHeader: React.FC<VisPacketHeaderProps> = (props) => {
   const packet = props.packet;
 
   const highlight = useCallback(
@@ -159,7 +155,7 @@ export const VisPacketHeader: React.FunctionComponent<VisPacketHeaderProps> = (
   );
 };
 
-export const IpPacketsVis: React.FunctionComponent = (props) => {
+export const IpPacketsVis: React.FC = () => {
   const hexEditorRef: MutableRefObject<HexEditorHandle> = useRef();
   const dispatch = useDispatch();
   const { playgroundId } = useContext(PlaygroundContext);

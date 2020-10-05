@@ -1,7 +1,7 @@
 import React from "react";
 import Head from "next/head";
 
-const Layout: React.FunctionComponent = ({ children }) => {
+const Layout: React.FC = ({ children }) => {
   return (
     <>
       <Head>
