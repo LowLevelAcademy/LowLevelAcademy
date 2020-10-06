@@ -2,9 +2,7 @@ import React from "react";
 import { NetworkPacketProps } from "./NetworkPacket";
 import { StyledTreeItem } from "./StyledTreeItem";
 
-export const UdpPacket: React.FunctionComponent<NetworkPacketProps> = (
-  props
-) => {
+export const UdpPacket: React.FC<NetworkPacketProps> = (props) => {
   const packet = props.packet;
   const num = props.num;
 

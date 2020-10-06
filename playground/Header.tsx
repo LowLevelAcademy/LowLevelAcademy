@@ -19,7 +19,7 @@ const BuildIcon = () => (
   </svg>
 );
 
-const Header: React.FunctionComponent = () => (
+const Header: React.FC = () => (
   <div className="header">
     <HeaderSet id="build">
       <SegmentedButtonSet>
@@ -34,12 +34,11 @@ interface HeaderSetProps {
   id: string;
 }
 
-const HeaderSet: React.FunctionComponent<HeaderSetProps> = ({
-  id,
-  children,
-}) => <div className={`header__set header__set--${id}`}>{children}</div>;
+const HeaderSet: React.FC<HeaderSetProps> = ({ id, children }) => (
+  <div className={`header__set header__set--${id}`}>{children}</div>
+);
 
-const ExecuteButton: React.FunctionComponent = () => {
+const ExecuteButton: React.FC = () => {
   const { playgroundId, codeWrapperFn } = useContext(PlaygroundContext);
   const dispatch = useDispatch();
   const execute = useCallback(
@@ -54,7 +53,7 @@ const ExecuteButton: React.FunctionComponent = () => {
   );
 };
 
-const ResetButton: React.FunctionComponent = () => {
+const ResetButton: React.FC = () => {
   const { playgroundId } = useContext(PlaygroundContext);
   const dispatch = useDispatch();
   const resetCode = useCallback(

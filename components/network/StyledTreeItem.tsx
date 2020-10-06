@@ -3,9 +3,7 @@ import TreeItem, { TreeItemProps } from "@material-ui/lab/TreeItem";
 
 import { useStyles } from "./NetworkPacketsTree";
 
-export const StyledTreeItem: React.FunctionComponent<TreeItemProps> = (
-  props
-) => {
+export const StyledTreeItem: React.FC<TreeItemProps> = (props) => {
   const classes = useStyles();
   return (
     <TreeItem

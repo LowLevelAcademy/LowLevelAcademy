@@ -1,6 +1,6 @@
 // Represents a single lesson in the module list.
 
-import React, { PropsWithChildren } from "react";
+import React from "react";
 
 export interface LessonTileProps {
   // Optional link to the lesson page.
@@ -14,11 +14,7 @@ export interface LessonTileProps {
   icon: string;
 }
 
-type ComponentProps = PropsWithChildren<LessonTileProps>;
-
-const LessonTile: React.FunctionComponent<ComponentProps> = (
-  props: ComponentProps
-) => {
+const LessonTile: React.FC<LessonTileProps> = (props) => {
   const isAvailable = !!props.href;
   let lessonTile = (
     <div className={"module_tile" + (!isAvailable ? " inactive_module" : "")}>

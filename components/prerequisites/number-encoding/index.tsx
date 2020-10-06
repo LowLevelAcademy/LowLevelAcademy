@@ -1,15 +1,7 @@
 // This module contains components that are used for representing numbers in different number systems.
 
-import React, { FunctionComponent, useState } from "react";
+import React, { useState } from "react";
 import styles from "./index.module.scss";
-
-interface NumberProps {
-  className: string;
-}
-
-const Number: FunctionComponent<React.PropsWithChildren<NumberProps>> = (
-  props
-) => <span className={props.className}>{props.children}</span>;
 
 // Component that allows to input only numeric values.
 const NumericInput = (props) => (
@@ -31,7 +23,7 @@ const NumericInput = (props) => (
 
 // Represents a decimal number
 export const Dec = (props) => (
-  <Number className={styles.decimal}>{props.children}</Number>
+  <span className={styles.decimal}>{props.children}</span>
 );
 
 const DecInput = (props) => (
@@ -42,10 +34,10 @@ const DecInput = (props) => (
 
 // Represents a hex number
 export const Hex = (props) => (
-  <Number className={styles.hexadecimal}>
+  <span className={styles.hexadecimal}>
     {props.children}
     <sup>&nbsp;hex</sup>
-  </Number>
+  </span>
 );
 
 const HexInput = (props) => (
@@ -56,10 +48,10 @@ const HexInput = (props) => (
 
 // Represents an octal number
 export const Oct = (props) => (
-  <Number className={styles.octal}>
+  <span className={styles.octal}>
     {props.children}
     <sup>&nbsp;oct</sup>
-  </Number>
+  </span>
 );
 
 const OctInput = (props) => (
@@ -70,10 +62,10 @@ const OctInput = (props) => (
 
 // Represents a binary number
 export const Bin = (props) => (
-  <Number className={styles.binary}>
+  <span className={styles.binary}>
     {props.children}
     <sup>&nbsp;bin</sup>
-  </Number>
+  </span>
 );
 
 const BinInput = (props) => (
@@ -86,7 +78,7 @@ export interface UtfPlaygroundProps {
   base: number;
 }
 
-export const UtfPlayground: React.FunctionComponent<UtfPlaygroundProps> = (
+export const UtfPlayground: React.FC<UtfPlaygroundProps> = (
   props: UtfPlaygroundProps
 ) => {
   const [text, setText] = useState("abcdefg");
@@ -180,7 +172,7 @@ interface ExponentationProps {
   expDescription: Array<string>;
 }
 
-export const Exponentiation: React.FunctionComponent<ExponentationProps> = ({
+export const Exponentiation: React.FC<ExponentationProps> = ({
   exp,
   radix,
   expDescription,
@@ -213,7 +205,7 @@ export const Exponentiation: React.FunctionComponent<ExponentationProps> = ({
   );
 };
 
-export const BinaryPlayground: React.FunctionComponent = () => {
+export const BinaryPlayground: React.FC = () => {
   const [number, setNumber] = useState(11);
   const digits = [];
 
@@ -270,7 +262,7 @@ export const BinaryPlayground: React.FunctionComponent = () => {
   );
 };
 
-export const DecimalPlayground: React.FunctionComponent = (props) => {
+export const DecimalPlayground: React.FC = (props) => {
   const [number, setNumber] = useState(123);
   const digits = [];
 
@@ -330,7 +322,7 @@ export const DecimalPlayground: React.FunctionComponent = (props) => {
   );
 };
 
-export const OctalPlayground: React.FunctionComponent = () => {
+export const OctalPlayground: React.FC = () => {
   const [number, setNumber] = useState(0o777);
   const digits = [];
 
@@ -404,7 +396,7 @@ export const OctalPlayground: React.FunctionComponent = () => {
   );
 };
 
-export const HexPlayground: React.FunctionComponent = () => {
+export const HexPlayground: React.FC = () => {
   const [number, setNumber] = useState(0x1f);
   const digits = [];
 

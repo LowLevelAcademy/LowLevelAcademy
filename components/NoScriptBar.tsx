@@ -2,7 +2,7 @@
 
 import React from "react";
 
-const NoScriptBar: React.FunctionComponent = () => {
+const NoScriptBar: React.FC = () => {
   return (
     <noscript>
       <p>

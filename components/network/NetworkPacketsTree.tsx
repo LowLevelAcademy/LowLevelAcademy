@@ -35,9 +35,7 @@ export interface NetworkPacketsProps {
   packets: Array<Packet>;
 }
 
-export const NetworkPackets: React.FunctionComponent<NetworkPacketsProps> = (
-  props
-) => {
+export const NetworkPackets: React.FC<NetworkPacketsProps> = (props) => {
   const classes = useStyles();
 
   return (

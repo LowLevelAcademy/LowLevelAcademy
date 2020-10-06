@@ -6,7 +6,7 @@ import AdvancedEditor from "./AdvancedEditor";
 
 import { PlaygroundContext, usePlaygroundSelector } from "./Playground";
 
-const Editor: React.FunctionComponent = () => {
+const Editor: React.FC = () => {
   const { playgroundId, codeWrapperFn } = useContext(PlaygroundContext);
   const code = usePlaygroundSelector((state) => state.code.current);
   const position = usePlaygroundSelector((state) => state.position);

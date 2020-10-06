@@ -3,7 +3,7 @@ import React from "react";
 import SinglePageLesson from "../../components/SinglePageLesson";
 import BinariesAndHexadecimalsContent from "../../components/prerequisites/BinaryAndHexadecimal.mdx";
 
-const Content: React.FunctionComponent = () => {
+const Content: React.FC = () => {
   return (
     <SinglePageLesson
       module="Prerequisites"

@@ -25,7 +25,7 @@ interface TestProps {
     children?: any
 }
 
-export const Test: React.FunctionComponent<TestProps> = (props) => {
+export const Test: React.FC<TestProps> = (props) => {
     const icon =
         props.state == TestState.Completed ?
             <TestCheckmark color="#39be78" /> :

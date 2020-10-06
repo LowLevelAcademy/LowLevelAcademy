@@ -2,6 +2,7 @@
   "name": "low-level-academy",
   "version": "0.0.1",
   "dependencies": {
+    "@babel/preset-typescript": "^7.10.4",
     "@material-ui/core": "^5.0.0-alpha.10",
     "@material-ui/icons": "^5.0.0-alpha.7",
     "@material-ui/lab": "^5.0.0-alpha.10",

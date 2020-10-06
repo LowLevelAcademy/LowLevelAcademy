@@ -9,9 +9,7 @@ export interface LessonHeaderProps {
   title: string;
 }
 
-const LessonHeader: React.FunctionComponent<LessonHeaderProps> = (
-  props: LessonHeaderProps
-) => {
+const LessonHeader: React.FC<LessonHeaderProps> = (props) => {
   return (
     <div id="module_header" className="row no-gutters">
       <div className="col-10 offset-1">

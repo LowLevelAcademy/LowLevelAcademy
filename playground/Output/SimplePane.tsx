@@ -11,7 +11,7 @@ export interface ReallySimplePaneProps {
   error?: string;
 }
 
-const SimplePane: React.FunctionComponent<SimplePaneProps> = (props) => {
+const SimplePane: React.FC<SimplePaneProps> = (props) => {
   const { playgroundId } = useContext(PlaygroundContext);
   return (
     <div className={`output-${props.kind}`}>

@@ -1,6 +1,6 @@
 import React from "react";
 
-export const SegmentedButtonSet: React.FunctionComponent = ({ children }) => (
+export const SegmentedButtonSet: React.FC = ({ children }) => (
   <div className="segmented-button">{children}</div>
 );
 

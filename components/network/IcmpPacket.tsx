@@ -4,9 +4,7 @@ import { convertIcmpTypeToStr } from "../../playground/reducers/virtualNetwork";
 import { NetworkPacketProps } from "./NetworkPacket";
 import { StyledTreeItem } from "./StyledTreeItem";
 
-export const IcmpPacket: React.FunctionComponent<NetworkPacketProps> = (
-  props
-) => {
+export const IcmpPacket: React.FC<NetworkPacketProps> = (props) => {
   const packet = props.packet;
   const num = props.num;
 

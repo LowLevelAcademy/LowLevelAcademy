@@ -17,9 +17,7 @@ export interface NetworkPacketProps {
   num: number;
 }
 
-export const NetworkPacket: React.FunctionComponent<NetworkPacketProps> = (
-  props
-) => {
+export const NetworkPacket: React.FC<NetworkPacketProps> = (props) => {
   const packet = props.packet;
   const num = props.num;
 

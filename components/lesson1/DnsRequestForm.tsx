@@ -24,7 +24,7 @@ const scrollToElem = (elem) => {
   window.scrollTo({ top: getElemPosition(elem), behavior: "smooth" });
 };
 
-const DnsRequestForm: React.FunctionComponent = () => {
+const DnsRequestForm: React.FC = () => {
   const dispatch = useDispatch();
   const resolvedIp = useSelector(
     (state: any) => selectCompileResults(state, "fullDemo")?.resolvedIp

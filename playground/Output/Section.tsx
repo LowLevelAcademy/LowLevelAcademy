@@ -4,7 +4,7 @@ interface SectionProps {
   kind: string;
 }
 
-const Section: React.FunctionComponent<SectionProps> = ({ kind, children }) =>
+const Section: React.FC<SectionProps> = ({ kind, children }) =>
   children && (
     <div className={`output-${kind}`}>
       <pre>

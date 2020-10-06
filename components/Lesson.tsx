@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NextSeo } from "next-seo";
 import { useDispatch, useSelector } from "react-redux";
 import { switchLessonPage } from "../playground/actions";
@@ -27,9 +27,7 @@ const scrollToElem = (elem) => {
   window.scrollTo({ top: getElemPosition(elem), behavior: "smooth" });
 };
 
-const Lesson: React.FunctionComponent<PropsWithChildren<LessonProps>> = (
-  props: PropsWithChildren<LessonProps>
-) => {
+const Lesson: React.FC<LessonProps> = (props) => {
   const dispatch = useDispatch();
   const [initialRender, setInitialRender] = useState(true);
   let currentPage = useSelector((state: any) =>

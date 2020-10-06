@@ -102,7 +102,7 @@ configureRustErrors({
   addImport: (playgroundId, code) => store.dispatch(addImport(code)),
 });
 
-const Lesson1: React.FunctionComponent = () => {
+const Lesson1: React.FC = () => {
   return (
     <Provider store={store}>
       <Lesson module="TCP/IP Fundamentals" badges={["Beginner", "Rust"]}>
