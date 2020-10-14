@@ -222,9 +222,7 @@ export const BinaryPlayground: React.FC = () => {
       <p>
         <span>
           The same thing happens if we use <Dec>2</Dec> as our number base. For
-          example, let&apos;s take the number&nbsp; Same thing happens if we use{" "}
-          <code>2</code> as our number base. For example, let&apos;s take a
-          number&nbsp;
+          example, let&apos;s take a number&nbsp;
         </span>
         <BinInput
           value={number.toString(2)}
