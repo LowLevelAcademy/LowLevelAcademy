@@ -137,7 +137,7 @@ udp_packet.set_len(8);
 // redundant check for source and destination IP addresses:
 udp_packet.fill_checksum(&our_own_address, &name_server_address);
 
-// That's all we have to do to for UDP!
+// That's all we have to do for UDP!
 // Now let's construct an IP header which will include our UDP datagram.
 // This part of the code is almost the same as in the previous example.
 // The main difference is in the IP packet size: now that we have a
@@ -200,7 +200,7 @@ return Ok(ip_address);`;
 
 const FINAL_TEST_CODE = `// Write your code here.
 
-// You need to send a request to name server to get the IP address of \`Alice\`,
+// You need to send a request to a name server to get the IP address of \`Alice\`,
 // then send any message to \`Alice\` (use the port number 1000), and finally
 // return a message that Alice has sent to you in response.
 
