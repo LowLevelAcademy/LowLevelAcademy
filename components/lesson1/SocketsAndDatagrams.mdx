@@ -34,12 +34,12 @@ looks like:
 </Playground>
 
 When you run this code, you see the destructured IP packet in a table. Each table cell contains an
-individial field of the packet header. The header fields we set in code are highlighted in green—we
+individual field of the packet header. The header fields we set in code are highlighted in green—we
 can skip the rest of them, for now.
 
 On the right side, you can see the exact same packet represented in the
 _hexadecimal_ numerical system which is often used
-to represent bytes because of its compactness (each single byte can be encoded by a hexadecimal
+to represent bytes because of its compactness (every single byte can be encoded by a hexadecimal
 number ranging from `0x00` to `0xFF`, which [corresponds to decimal](https://duckduckgo.com/?q=0xFF+in+decimal&t=hk&ia=answer)
 `0` to `255`). This demonstrates that the IP header is just a sequence of numbers that we can interpret
 and represent in different ways. If you are not comfortable with hexadecimal numbers, you can refer to
@@ -60,7 +60,7 @@ protocol defined by you.
 UDP headers are only 8 bytes long. They contain source and destination _port numbers_ which help to identify
 different services running on the same computer—it's very common for a server to have many functions. Usually,
 we designate a specific port number for a given service by convention. For example, name servers commonly use
-the port number 53.
+port number 53.
 
 A UDP header also includes the total size of a datagram in bytes and a _checksum_ which is used to verify
 that the original network packet is not corrupted during transmission. And that's all it adds to the IP header!
@@ -71,5 +71,5 @@ Let's construct a UDP datagram header and add it to the previous example:
   <UdpDatagramVis />
 </Playground>
 
-Now we are ready to move onto sending messages we have constructed
+Now we are ready to move on to sending messages we have constructed
 over the network!
