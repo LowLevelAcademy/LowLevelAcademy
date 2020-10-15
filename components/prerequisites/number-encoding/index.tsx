@@ -99,6 +99,9 @@ export const UtfPlayground: React.FC<UtfPlaygroundProps> = (
       break;
   }
 
+  const encoder = new TextEncoder();
+  const utf8 = encoder.encode(text);
+
   return (
     <form className={styles.utfPlayground}>
       <div className="form-group mr-3">
@@ -109,12 +112,7 @@ export const UtfPlayground: React.FC<UtfPlaygroundProps> = (
         />
       </div>
       <div className={styles.numbersEncoding}>
-        <Base>
-          {text
-            .split("")
-            .map((char) => char.charCodeAt(0).toString(props.base))
-            .join(" ")}
-        </Base>
+        <Base>{utf8.join(" ")}</Base>
       </div>
     </form>
   );
