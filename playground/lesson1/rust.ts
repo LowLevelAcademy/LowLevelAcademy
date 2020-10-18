@@ -132,9 +132,14 @@ udp_packet.set_len(8);
 // Lastly, the UDP header also contains its own checksum.
 // Why do we need another one if we have already calculated the checksum
 // for our IP packet? Remember that the checksum we calculated before
-// includes data only for the _IP header_, but not for the UDP datagram.
-// In addition to that, the checksum we calculate for UDP also adds a
-// redundant check for source and destination IP addresses:
+// includes data only for the _IP header_, but not for its payload.
+// The checksum we calculate for UDP covers  some fields of a (pseudo)
+// _IP header_ and the entirety of the UDP Header and Data.
+
+// If you are interested in learning more about the actual algorithm used for
+// checksum calculation, you can find it here:
+// https://en.wikipedia.org/wiki/User_Datagram_Protocol#Checksum_computation
+
 udp_packet.fill_checksum(&our_own_address, &name_server_address);
 
 // That's all we have to do for UDP!
