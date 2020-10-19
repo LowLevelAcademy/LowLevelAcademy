@@ -112,7 +112,7 @@ export const UtfPlayground: React.FC<UtfPlaygroundProps> = (
         />
       </div>
       <div className={styles.numbersEncoding}>
-        <Base>{utf8.join(" ")}</Base>
+        <Base>{utf8.map(c => c.toString(props.base)).join(" ")}</Base>
       </div>
     </form>
   );
