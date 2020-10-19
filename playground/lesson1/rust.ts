@@ -31,7 +31,7 @@ const IP_HEADER_CODE = `// An IP packet can be divided into two parts: a header 
 // The header is where we put a destination IP address, our own address (also
 // known as the source address), and some more helpful information.
 
-// An IP packet is just a sequence of 20 bytes.
+// An IP header is just a sequence of 20 bytes.
 // Let's allocate an array to store our header:
 let mut header_data = [0u8; 20];
 
