@@ -83,6 +83,9 @@ export const UtfPlayground: React.FC<UtfPlaygroundProps> = (
 ) => {
   const [text, setText] = useState("abcdefg");
 
+  // Represents numbers from a buffer in decimal.
+  let transformationFn: (utf8: Uint8Array) => string = (utf8) => utf8.join(" ");
+
   let Base;
   switch (props.base) {
     case 8:
@@ -93,6 +96,12 @@ export const UtfPlayground: React.FC<UtfPlaygroundProps> = (
       break;
     case 16:
       Base = Hex;
+
+      // Represents numbers from a buffer in hex.
+      transformationFn = (utf8) =>
+        Array.prototype.map
+          .call(utf8, (x) => ("00" + x.toString(16)).slice(-2))
+          .join(" ");
       break;
     default:
       Base = Dec;
@@ -112,7 +121,7 @@ export const UtfPlayground: React.FC<UtfPlaygroundProps> = (
         />
       </div>
       <div className={styles.numbersEncoding}>
-        <Base>{utf8.map(c => c.toString(props.base)).join(" ")}</Base>
+        <Base>{transformationFn(utf8)}</Base>
       </div>
     </form>
   );
