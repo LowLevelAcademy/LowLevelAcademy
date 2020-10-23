@@ -1,0 +1,184 @@
+import styles from "./Fragmentation.module.scss";
+import MtuSlider from "./MtuSlider";
+
+In <a href="/tcp-ip-fundamentals/exchanging-messages">the first lesson</a>, we found the IP address of your friend Alice and we had a nice chat.
+But now she asks you to send her a postcard as an image file, and you have been trying to do that—unsuccessfully.
+Turns out, you can't send a large file in a single network packet!
+
+Let's see why exactly this happens and devise a solution to overcome this limitation, learning how to successfully deliver
+your picture. After completing this lesson, you’ll learn how to split
+large messages into smaller packets using Rust iterators and how to deal with out-of-order delivery.
+
+Let's suppose that this image is of 260 kilobytes in size. As we learned in the previous lesson, a single IP packet fits 65 kilobytes of data.
+In real networks, though, this number is even smaller as it is limited by the constraints of the physical Ethernet or Wi-Fi networks.
+We call this limit the _Maximum transmission unit_ size, or MTU for short. _MTU_ depends on the physical network configuration, and in
+the majority of [Ethernet](https://simple.wikipedia.org/wiki/Ethernet) or Wi-Fi-based networks it sits at _1500_ bytes.
+In practice, this means that most IP packets are smaller than 1.5 kilobytes.
+
+What happens if we have an MTU of 1500 but send an IP packet of 65 kilobytes in size?
+
+To find out, let's get back to the table deconstruction of an IP packet:
+
+<table
+  className="ip-packet-vis"
+  style={{ width: "75%", marginBottom: "30px", marginTop: "20px" }}
+>
+  <thead>
+    <tr>
+      <td colSpan="2">
+        <a title="column size in bits">0</a>
+      </td>
+      <td colSpan="2" className="text-right">
+        <a title="column size in bits">15</a>
+      </td>
+      <td colSpan="2">
+        <a title="column size in bits">16</a>
+      </td>
+      <td colSpan="2" className="text-right">
+        <a title="column size in bits">31</a>
+      </td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Version</td>
+      <td>Header length</td>
+      <td colSpan="2">Type of Service</td>
+      <td colSpan="4">Total length</td>
+    </tr>
+    <tr>
+      <td colSpan="4" className={styles.tableIdentification}>
+        Identification
+      </td>
+      <td className={styles.tableFlags}>Flags</td>
+      <td colSpan="3" className={styles.tableFragmentOffset}>
+        Fragment offset
+      </td>
+    </tr>
+    <tr>
+      <td colSpan="2">Time to live (TTL)</td>
+      <td colSpan="2">Protocol</td>
+      <td colSpan="4">Header checksum</td>
+    </tr>
+    <tr>
+      <td colSpan="8">Source IP address</td>
+    </tr>
+    <tr>
+      <td colSpan="8">Destination IP address</td>
+    </tr>
+  </tbody>
+</table>
+
+There are three fields which are relevant to our question: <span className={styles.identification}>identification</span>, <span className={styles.flags}>flags</span>,
+and the <span className={styles.fragmentOffset}>fragment offset</span>.
+
+Because we know the MTU size in advance, we can cut IP packets into many smaller pieces called _fragments_.
+Each fragment becomes its own IP packet, carrying a slice of the original message payload with its own unique <span className={styles.identification}>identification</span> number.
+The <span className={styles.fragmentOffset}>offset</span> says which part of the original payload this fragment carries.
+This information allows the receiving end to reconstruct the original packet from its fragmented form. Finally, <span className={styles.flags}>flags</span>
+indicate if the IP packet is fragmented, and if it is, the final fragment will have <span className={styles.flags}>flags</span> set to zero
+while the <span className={styles.fragmentOffset}>fragment offset</span> will have a non-zero value.
+
+Let's see how a single 16 KB IP packet is split up when we adjust the MTU size:
+
+<MtuSlider />
+
+This kind of fragmentation happens without our knowledge. It's a part of the network stack implementation in operating systems,
+so we don't have to deal with it at the IP level.
+
+Moreover, in the real-world Internet, we will rarely experience IP fragmentation.
+The reason is that IP fragmentation is fragile: for example, if one single fragment is not delivered, the original message has
+to be dropped, fragmented again, and retransmitted because there's no way to retransmit only a part of it.
+Instead, packets are generally made smaller than the MTU using _path MTU discovery_, where packets are made progressively smaller
+until they are accepted at the destination.
+
+And remember: we're dealing with _IP payloads_, so if we send a UDP datagram, the IP payload _will include the UDP header_.
+Because of this, we can't see UDP source and destination port numbers before completely reconstructing the original message:
+
+<div className={styles.packet_view}>
+  <div className={styles.splitIpPacket} style={{ width: 500 }}>
+    <div>IP packet (1500 bytes)</div>
+    <div className={styles.tableIdentification}>Identification: 0</div>
+    <div className={styles.tableFragmentOffset}>Offset: 0</div>
+    <div>
+      Payload (UDP header):
+      <table
+        className="ip-packet-vis"
+        style={{ width: "100%", marginBottom: "15px" }}
+      >
+        <thead>
+          <tr>
+            <td className="text-left">
+              <a title="column size in bits">0</a>
+            </td>
+            <td className="text-right">
+              <a title="column size in bits">15</a>
+            </td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td className="udp active" colSpan={2}>
+              Source port
+            </td>
+          </tr>
+          <tr>
+            <td className="udp active" colSpan={2}>
+              Destination port
+            </td>
+          </tr>
+          <tr>
+            <td className="udp active" colSpan={2}>
+              UDP length: 3500
+            </td>
+          </tr>
+          <tr>
+            <td className="udp active" colSpan={2}>
+              UDP checksum
+            </td>
+          </tr>
+          <tr>
+            <td className="udp active" colSpan={2}>
+              UDP payload
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div className={styles.splitIpPacket} style={{ width: 500 }}>
+    <div>IP packet (1500 bytes)</div>
+    <div className={styles.tableIdentification}>Identification: 1</div>
+    <div className={styles.tableFragmentOffset}>Offset: 1500</div>
+    <div>
+      Payload:
+      <table
+        className="ip-packet-vis"
+        style={{ width: "100%", marginBottom: "15px" }}
+      >
+        <thead>
+          <tr>
+            <td className="text-left">
+              <a title="column size in bits">0</a>
+            </td>
+            <td className="text-right">
+              <a title="column size in bits">...</a>
+            </td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td className="udp active" colSpan={2}>
+              UDP payload
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+These limitations have led to completely disabling fragmentation in the newer Internet Protocol version (IPv6).
+Naturally, you ask: why are we even talking about it then? It's because while the _IP_ fragmentation is not that
+useful to us, it's still a nice idea we can reuse for our own purpose: we can do the fragmentation at the level
+of our application. That's what we will do on the next page.

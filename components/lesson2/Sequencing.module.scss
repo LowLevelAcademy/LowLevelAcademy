@@ -1,0 +1,26 @@
+.packet {
+  border-radius: 50px;
+  padding: 14px 24px;
+  color: white;
+  text-align: center;
+  display: inline-block;
+  margin-right: 15px;
+  font-weight: bold;
+  position: relative;
+}
+
+.orderedPackets {
+  text-align: center;
+  margin: 25px 0px;
+}
+
+.orderedPacketsHeader {
+  margin-bottom: -63px;
+}
+
+/* < md */
+@media only screen and (min-width: 0px) and (max-width: 768px) {
+  .orderedPacketsHeader {
+    margin-bottom: 10px;
+  }
+}

@@ -14,7 +14,7 @@ const Page: React.FC<PageProps> = (props) => {
         props.isCurrent ? "" : "d-none"
       }`}
     >
-      <div className="col-10 offset-1">{props.children}</div>
+      <div className="col-10 offset-1 col-xl-8">{props.children}</div>
     </div>
   );
 };

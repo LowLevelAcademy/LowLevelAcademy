@@ -18,6 +18,7 @@ import { NetworkPacketsViewer } from "../network/NetworkPacketsViewer";
 import * as selectors from "../../playground/selectors";
 
 import VNetVisualize, { VNetInterface } from "../network/VirtualNetworkVis";
+import { initializeVirtualNetwork } from "../wasm/virtualNetwork";
 
 interface OutputProps {
   /**
@@ -87,21 +88,21 @@ export const FullDemoVis: React.FC = () => {
     // animate packets sending
     if (sentPackets.length > 0) {
       const lastSentPacket = sentPackets[sentPackets.length - 1];
+      const isSentByNameServer = lastSentPacket.ip.sourceIp == "1.2.3.4";
       setTimeout(
         () => {
           visRef.current.emitPacket(
-            lastSentPacket.ip.sourceIp,
-            lastSentPacket.ip.destinationIp,
+            visRef.current.getLink(0),
+            isSentByNameServer ? true : false, // reverse packet order
             sentPackets.length
           );
         },
-        lastSentPacket.ip.sourceIp === "1.2.3.4" ? 1000 : 0
+        isSentByNameServer ? 1000 : 0
       );
     }
   }, [sentPackets]);
 
   // Initialise the virtual network module
-  // TODO: move this code to a separate component
   useEffect(() => {
     // Dispatches each new sent network frame
     const notifyPacket = (res_ptr, len) => {
@@ -111,36 +112,17 @@ export const FullDemoVis: React.FC = () => {
       dispatch(createPlaygroundAction(playgroundId, sendNetworkFrame(frame)));
     };
 
-    WebAssembly.instantiateStreaming(fetch("/virtualnet.wasm"), {
-      env: {
-        notify_rx: (_res_ptr, _len) => {
-          // ignore rx for now
-        },
-        notify_tx: notifyPacket,
-        test_completed: () => {
-          // not applicable
-        },
-        print_log: (ptr, size) => {
-          const heap = new Uint8Array(vnetModule.current.exports.memory.buffer);
-
-          let s = "";
-          for (let i = ptr; i < ptr + size; ++i)
-            s += String.fromCharCode(heap[i]);
-
-          console.log(s);
-        },
+    initializeVirtualNetwork(
+      vnetModule,
+      (exports) => {
+        exports.setup_network(true);
       },
-    }).then((module) => {
-      vnetModule.current = module.instance;
-      //(vnetModule.current.exports.setup_network as CallableFunction)(true);
-      vnetModule.current.exports.setup_network(true);
-    });
+      { notify_tx: notifyPacket }
+    );
   }, []);
 
   useEffect(() => {
     if (generatedWasm != null && vnetModule.current != null) {
-      console.log("Use effect!", vnetModule.current);
-
       const onExecSuccess = (result) => {
         dispatch(
           createPlaygroundAction(playgroundId, receiveExecutionSuccess(result))
@@ -161,7 +143,7 @@ export const FullDemoVis: React.FC = () => {
 
       evalFullDemoWasm(
         generatedWasm,
-        vnetModule.current,
+        vnetModule,
         execMain,
         onExecSuccess,
         onExecFailure

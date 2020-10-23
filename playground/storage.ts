@@ -1,7 +1,7 @@
-import merge from 'lodash/merge';
-import { StoreEnhancer, StoreEnhancerStoreCreator } from 'redux';
+import merge from "lodash/merge";
+import { StoreEnhancer, StoreEnhancerStoreCreator } from "redux";
 
-type SimpleStorage = Pick<Storage, 'getItem' | 'setItem'>;
+type SimpleStorage = Pick<Storage, "getItem" | "setItem">;
 
 interface Config<S> {
   storageFactory: () => SimpleStorage;
@@ -21,37 +21,37 @@ export class InMemoryStorage {
   }
 }
 
-const key = 'redux';
+const storage = <St>(key: string, config: Config<St>): StoreEnhancer => (
+  createStore: StoreEnhancerStoreCreator<{}, St>
+) => (reducer, preloadedState) => {
+  const { storageFactory, serialize, deserialize } = config;
 
-const storage = <St>(config: Config<St>): StoreEnhancer =>
-  (createStore: StoreEnhancerStoreCreator<{}, St>) =>
-    (reducer, preloadedState) => {
-      const { storageFactory, serialize, deserialize } = config;
+  let storage: SimpleStorage;
 
-      let storage: SimpleStorage;
+  try {
+    // Attempt to use the storage to see if security settings are preventing it.
+    storage = storageFactory();
+    const current = storage.getItem(key);
+    storage.setItem(key, current);
+  } catch (e) {
+    console.warn(
+      "Unable to store configuration, falling back to non-persistent in-memory storage"
+    );
+    storage = new InMemoryStorage();
+  }
 
-      try {
-        // Attempt to use the storage to see if security settings are preventing it.
-        storage = storageFactory();
-        const current = storage.getItem(key);
-        storage.setItem(key, current);
-      } catch (e) {
-        console.warn('Unable to store configuration, falling back to non-persistent in-memory storage');
-        storage = new InMemoryStorage();
-      }
+  const serializedState = storage.getItem(key);
+  const persistedState = deserialize(serializedState);
+  const mergedPreloadedState = merge(preloadedState, persistedState);
+  const theStore = createStore(reducer, mergedPreloadedState);
 
-      const serializedState = storage.getItem(key);
-      const persistedState = deserialize(serializedState);
-      const mergedPreloadedState = merge(preloadedState, persistedState);
-      const theStore = createStore(reducer, mergedPreloadedState);
+  theStore.subscribe(() => {
+    const state = theStore.getState();
+    const serializedState = serialize(state);
+    storage.setItem(key, serializedState);
+  });
 
-      theStore.subscribe(() => {
-        const state = theStore.getState();
-        const serializedState = serialize(state);
-        storage.setItem(key, serializedState);
-      });
-
-      return theStore;
-    };
+  return theStore;
+};
 
 export default storage;

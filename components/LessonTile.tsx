@@ -19,14 +19,14 @@ const LessonTile: React.FC<LessonTileProps> = (props) => {
   let lessonTile = (
     <div className={"module_tile" + (!isAvailable ? " inactive_module" : "")}>
       <div className="row no-gutters">
-        <div className="col-3">
+        <div className="col-3 col-md-2 col-lg-3">
           <img
             className="lesson_icon"
             src={"/images/icons/" + props.icon}
             alt={props.title + " icon"}
           />
         </div>
-        <div className="col-9">
+        <div className="col-9 col-md-10 col-lg-9">
           <h3>{props.title}</h3>
           <p>{props.children}</p>
         </div>
@@ -40,7 +40,7 @@ const LessonTile: React.FC<LessonTileProps> = (props) => {
       </a>
     );
   }
-  return <div className="col-12 col-md-6 col-xl-4">{lessonTile}</div>;
+  return <div className="col-12 col-lg-6">{lessonTile}</div>;
 };
 
 export default LessonTile;

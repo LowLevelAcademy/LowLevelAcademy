@@ -2,9 +2,7 @@
 
 $selected-radio: desaturate(lighten($color-accent, 30%), 20%);
 $unselected-radio: lighten($selected-radio, 20%);
-$grey: #dfe3e4;
-$dark-grey: #666;
-$border-color: $grey;
+$border-color: $color-grey;
 $border: 1px solid $border-color;
 
 @mixin split-first-child() {
@@ -427,7 +425,7 @@ $header-transition: 0.2s ease-in-out;
 }
 
 .ace-github .ace_comment {
-  color: $dark-grey;
+  color: $color-light-dark;
 }
 
 .packet-vis-table-container {
@@ -450,7 +448,7 @@ $header-transition: 0.2s ease-in-out;
 
 .packet-vis-section-header {
   font-size: 85%;
-  color: $dark-grey;
+  color: $color-light-dark;
   text-align: center;
   margin-bottom: 0.5em;
 }
@@ -487,7 +485,7 @@ table.ip-packet-vis {
     td {
       border: $border;
       text-align: center;
-      color: $dark-grey;
+      color: $color-light-dark;
       cursor: pointer;
     }
 

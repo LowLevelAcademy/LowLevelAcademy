@@ -1,0 +1,146 @@
+import { NextSeo } from "next-seo";
+
+<NextSeo
+  title="Explorable Programming with Rust and WebAssembly - Low-Level Academy"
+  description="Discussing ideas behind the learnable systems programming course. How Rust Playground works, how we can use it for education, and how we implemented client-side code execution."
+  openGraph={{
+    title: "Explorable Programming with Rust and WebAssembly",
+    description:
+      "Discussing ideas behind the learnable systems programming course. How Rust Playground works, how we can use it for education, and how we implemented client-side code execution.",
+  }}
+/>
+
+I have always been passionate and curious about systems programming. At a first glance, this area of knowledge might seem very complicated and even impenetrable for a lot of people. Thankfully, with Rust, the tide has started to turn: the Rust community has demonstrated that sometimes the perceived complexity is rooted in the lack of support, tools, and educational content.
+
+In this blog post, I want to introduce you to ideas behind Low-Level Academy, a course with the goal of democratizing
+Rust and systems programming education further. Bret Victor’s [post on learnable programming](http://worrydream.com/#!/LearnableProgramming)
+was written back in 2012 but it’s still just as relevant in 2020: with the advent of technologies like WebAssembly,
+now is the best time to expand these ideas to new areas. With WebAssembly, we can create complex simulations and playgrounds
+right in our browsers, all while giving people insight into what is happening under the hood of a typical program.
+
+This is the main idea that underlies our courses: we don’t just want to describe how a given system works, we want to show you
+how to create it, all while demonstrating what happens inside. Right now, we're applying this approach to network programming, but we
+will keep expanding it to more topics like process management on Linux and memory allocation.
+
+## Repurposing the Rust playground
+
+It started with a hack based on the [Rust playground](https://play.rust-lang.org/).
+The Rust playground is one of the best learning environments for Rust because of its ease of use: you don’t have to install
+the Rust compiler on your system; all you need to do is to open it in your web browser and start coding. It even works on
+mobile devices.
+
+It’s interesting and worthwhile to look at how the Rust playground works: it runs your code on the playground server and
+returns the output to your browser.
+
+<figure>
+  <img
+    src="/blog/images/rust-playground-workflow.png"
+    width="600px"
+    alt="Rust Playground workflow: it executes your code on the server side and returns the output to your browser."
+  />
+</figure>
+
+So I thought: why don’t we execute this code directly on a user’s computer, since Rust now compiles into WebAssembly?
+A [quick & dirty proof-of-concept](https://github.com/nbaksalyar/rust-playground/) demonstrated that it works just as
+expected—it’s possible to call JavaScript functions from the Rust code and the other way around:
+
+<figure>
+  <img
+    src="/blog/images/wasm-playground.png"
+    width="600px"
+    alt="Rust Playground with WebAssembly. This figure shows how we can call JavaScript functions from the Rust Playground if we make it compile into WebAssembly."
+  />
+</figure>
+
+I also thought it would have been fun to try compiling more complex Rust libraries into WebAssembly.
+
+I started with [smoltcp](https://github.com/smoltcp-rs/smoltcp), which is a complete TCP/IP stack implementation written
+in Rust, used for embedded software development—unsurprisingly, _smoltcp_ also works in the browser because it is a kind
+of embedded environment. With that, we can run real UDP or TCP based servers and clients directly in the browser, which
+is an interesting opportunity for education. We can take this idea a step further and store the state of such
+a virtual network in plain JavaScript objects and use a front-end framework such as React for interpreting and visualizing
+it in different ways.
+
+This is how Low-Level Academy was born. It combines the ease of use and minimal setup of the Rust playground with ideas
+behind Bret Victor’s learnable programming to teach low-level concepts.
+
+## How it works
+
+When you click ‘Run’, the code is transferred to our server which executes the Rust compiler, setting the target output
+to WebAssembly. The resulting module is downloaded and executed in your browser—no surprises here. When it gets more
+complicated, though, is when we start adding libraries into the equation: a typical Rust WebAssembly module that includes
+dependencies has a size of around 1-2 megabytes, which is a bit too heavy if we need to transfer it for each request—it
+would introduce perceivable delays and would not be too polite to users with data caps or mobile devices.
+
+To solve this problem, we devised a different approach.
+
+<figure>
+  <img
+    src="/blog/images/lowlvl-workflow.png"
+    width="650px"
+    alt="Low-Level Academy Playground workflow. It compiles Rust code on the server side and returns a WebAssembly module which is executed in your browser."
+  />
+</figure>
+
+The code that a user writes in the playground is compiled without using any libraries. This allows us to generate
+minimal modules of only 35-40 KB in size. We also have a separate module that does all the heavy lifting, such as running
+the simulation (e.g., the virtual network and the TCP/IP stack), and it has no size restrictions because it needs to be
+downloaded only once. It then exposes an API that is used by the playground code.
+
+The lightweight user modules are “linked” with the heavy module. The problem with WebAssembly is that dynamic linking is not defined formally in the specification (there’s only a [draft](https://github.com/WebAssembly/tool-conventions/blob/master/DynamicLinking.md)), and there is no simple way to call functions exported by one individual module from another because they don’t have shared memory and state. To solve this problem, we copy memory between modules when we need to call the API exposed by the library module:
+
+<figure>
+  <img
+    src="/blog/images/modules.png"
+    width="500px"
+    alt="How WebAssembly module linking works: a user's module calls functions from the virtual network module and then copies memory to get the results."
+  />
+</figure>
+
+Another problem with this approach is that exposed WebAssembly APIs are low-level and aren’t suitable for consumption by human beings. Besides, users expect the availability of APIs they are familiar with—for example, for network programming, that’s the std::net module from the Rust standard library.
+
+To address these needs, we reimplement a part of the standard library: the user’s playground code is wrapped into a package that contains a UdpSocket API implementation that is compatible with the standard library API and uses functions exposed by the simulation module:
+
+<figure>
+  <img
+    src="/blog/images/code-wrapper.png"
+    width="500px"
+    alt="Combining code with the wrapper: the wrapper contains code that emulates the Rust standard library and it is implicitly added to the user's code."
+  />
+</figure>
+
+Finally, the last piece of this puzzle is a JavaScript module which handles visualization. Because we can store all data as JSON objects inside a Redux store, we have a lot of freedom in how we work with this data. We can visualize it, store it, share it, and use interesting features provided by Redux, like, for example, [time travel](https://redux.js.org/recipes/implementing-undo-history).
+
+If we want to visualize the network state, there’s a source of inspiration one can’t ignore: Wireshark. It’s a program that allows you to inspect all network packets that are transferred on a given network interface. So we implemented a similar packet viewer in JavaScript:
+
+<figure>
+  <img
+    src="/blog/images/wireshark.png"
+    width="45%"
+    alt="Taking inspiration from the Wireshark packet view: it shows the packet components and contents."
+  />
+  <img
+    src="/blog/images/packet-view.png"
+    width="45%"
+    alt="Taking inspiration from the Wireshark packet view: it shows the packet components and contents."
+  />
+</figure>
+
+But this is only a sneak peak of what we can do with this approach. There is much more in the realm of possibilities.
+
+## What’s next?
+
+When all the pieces are put together, we get an interactive programming environment that is tailored for our educational needs.
+This framework opens up a lot of interesting possibilities: we can visualize not only networks, but also memory, OS processes,
+file systems internals, async tasks, and a lot more.
+
+While we are still far away from the ideals presented in Bret Victor’s article, it’s only a start. WebAssembly is versatile and
+treats all code equally, so we could even go one step further and compile parts of the Rust compiler itself into WebAssembly
+modules, and use them for education. For example, this way we can implement IDE-like context hints in the code editor or
+step-by-step execution, which can be instrumental for demonstrating concepts like asynchronous I/O or multithreading in a
+clear way.
+
+## Give it a try
+
+You can try our [our first lesson](/tcp-ip-fundamentals/exchanging-messages) about TCP/IP fundamentals which uses the virtual network module.
+You can also find the complete source code for all of our content on [our GitHub](https://github.com/LowLevelAcademy/).

@@ -3,7 +3,7 @@ $color-progress-inactive-points: lighten($color-light-dark, 35%);
 
 .lesson_progress {
   list-style: none;
-  margin: 70px 0 80px 0;
+  margin-top: 70px;
   padding: 0;
   display: table;
   table-layout: fixed;
@@ -24,7 +24,7 @@ $color-progress-inactive-points: lighten($color-light-dark, 35%);
   display: table-cell;
   text-align: center;
   font-size: 0.8em;
-  transition: color .2s;
+  transition: color 0.2s;
 }
 .lesson_progress > li:hover {
   color: $color-dark;
@@ -34,7 +34,7 @@ $color-progress-inactive-points: lighten($color-light-dark, 35%);
   display: block;
   margin: 0 auto;
   background: $color-progress-line;
-  transition: background .2s;
+  transition: background 0.2s;
   width: 3em;
   height: 3em;
   text-align: center;
@@ -48,11 +48,11 @@ $color-progress-inactive-points: lighten($color-light-dark, 35%);
   background: $color-progress-inactive-points;
 }
 .lesson_progress > li:after {
-  content: '';
+  content: "";
   position: absolute;
   display: block;
   background: $color-progress-line;
-  transition: background .2s;
+  transition: background 0.2s;
   width: 100%;
   height: 0.5em;
   top: 1.25em;
@@ -63,7 +63,8 @@ $color-progress-inactive-points: lighten($color-light-dark, 35%);
 .lesson_progress > li:last-child:after {
   display: none;
 }
-.lesson_progress > li.is_complete:before, .lesson_progress > li.is_complete:after {
+.lesson_progress > li.is_complete:before,
+.lesson_progress > li.is_complete:after {
   color: $color-page-background;
   background: $color-dark;
 }

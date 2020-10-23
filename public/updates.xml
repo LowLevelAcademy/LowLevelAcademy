@@ -6,6 +6,20 @@
                 <link>https://lowlvl.org</link>
                 <atom:link href="https://lowlvl.org/updates.xml" rel="self" type="application/rss+xml" />
                 <item>
+                        <title>Fragmentation</title>
+                        <description>Learn how to transmit large files by splitting them into small bits.</description>
+                        <pubDate>Wed, 13 Oct 2020 09:00:00 GMT</pubDate>
+                        <link>https://lowlvl.org/tcp-ip-fundamentals/fragmentation</link>
+                        <guid isPermaLink="true">https://lowlvl.org/tcp-ip-fundamentals/fragmentation</guid>
+                </item>
+                <item>
+                        <title>Blog post: Explorable Programming with Rust and WebAssembly</title>
+                        <description>Discussing ideas behind the learnable systems programming course. How Rust Playground works, how we can use it for education, and how we implemented client-side code execution.</description>
+                        <pubDate>Wed, 13 Oct 2020 09:00:00 GMT</pubDate>
+                        <link>https://lowlvl.org/blog/explorable-programming</link>
+                        <guid isPermaLink="true">https://lowlvl.org/blog/explorable-programming</guid>
+                </item>
+                <item>
                         <title>Prerequisites: Number Encoding</title>
                         <description>How to work with binary and hexadecimal numbers.</description>
                         <pubDate>Wed, 5 Oct 2020 09:00:00 GMT</pubDate>

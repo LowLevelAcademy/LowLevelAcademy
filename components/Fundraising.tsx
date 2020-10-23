@@ -26,7 +26,7 @@ const Fundraising: React.FC<FundraisingProps> = (props) => {
 
   return (
     <div id="footer-fundraise" className="row no-gutters">
-      <div className="col-12 text-center">
+      <div className="col-10 offset-1 col-xl-8 text-center">
         {sponsors}
         <p>
           Please{" "}

@@ -20,6 +20,10 @@ const OSS_PROJECTS_LIST = [
   "kmck/react-hex-editor",
   "SergioBenitez/Rocket",
   "docker/docker-ce",
+  "garmeeh/next-seo",
+  "fabricjs/fabric.js",
+  "framer/motion",
+  "jaredhanson/passport",
 ];
 
 const API_URL = "https://api.github.com/graphql";
@@ -91,7 +95,7 @@ interface OssProjectProps {
 
 const OssProject: React.FC<OssProjectProps> = (props) => {
   return (
-    <div className="col-12 col-md-6 col-lg-4 col-xl-4">
+    <div className="col-12 col-lg-5 px-4">
       <div className="row">
         <div className="col-3 text-center">
           <a href={props.url}>
@@ -114,19 +118,19 @@ export default function About(props) {
     <>
       <div>
         <div id="team" className="row no-gutters mb-5">
-          <div className="col-10 offset-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
+          <div className="col-10 offset-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-2">
             <p className="about_introduction text-center">
               <strong>Low-Level Academy</strong> is an interactive course where
               you can learn systems programming by creating small projects from
               the first principles with visual and intuitive explanations.
             </p>
           </div>
-          <div className="col-10 offset-1">
+          <div className="col-10 offset-1 col-xl-8">
             <div className="about-header text-center">
               <h1>Our team</h1>
             </div>
             <div className="row no-gutters justify-content-center">
-              <div className="col-12 col-md-6 col-xl-4 px-4">
+              <div className="col-12 col-md-6 col-lg-5 px-4">
                 <div className="row text-center">
                   <img src="/images/team/nikita.jpg" />
                   <ul className="teammember-social">
@@ -148,7 +152,7 @@ export default function About(props) {
                 </div>
               </div>
 
-              <div className="col-12 col-md-6 col-xl-4 px-4">
+              <div className="col-12 col-md-6 col-lg-5 px-4">
                 <div className="row text-center">
                   <img src="/images/team/andrey.jpg" />
                   <ul className="teammember-social">
@@ -177,18 +181,18 @@ export default function About(props) {
               </div>
             </div>
           </div>
-          <div className="col-10 offset-1">
+          <div className="col-10 offset-1 col-xl-8">
             <div className="about-header text-center">
               <h2>Thanks</h2>
             </div>
             <div className="row no-gutters text-center justify-content-center">
-              <div className="col-12 col-lg-6 col-xl-4 about-description">
+              <div className="col-12 col-md-6 col-lg-5 about-description">
                 <h3>
                   <a href="https://jackwherry.com/">Jack Wherry</a>
                 </h3>
                 <p>Technical editing and proofreading.</p>
               </div>
-              <div className="col-12 col-lg-6 col-xl-4 about-description">
+              <div className="col-12 col-md-6 col-lg-5 about-description">
                 <h3>
                   <a href="https://uxwing.com/">Uxwing</a>
                 </h3>
@@ -198,7 +202,7 @@ export default function About(props) {
           </div>
         </div>
         <div id="opensource" className="row no-gutters">
-          <div className="col-10 offset-1 col-xl-8 offset-xl-2">
+          <div className="col-10 offset-1 col-xl-8">
             <div className="about-header text-center">
               <h2>Standing on the Shoulders of Giants</h2>
               <p>

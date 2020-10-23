@@ -1,0 +1,50 @@
+@import "../styles/colors";
+
+.lesson_trailer {
+  margin-bottom: 40px;
+  width: 640px;
+  height: 360px;
+}
+
+.days_counter_block {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.days_counter {
+  h1 {
+    text-align: center;
+    color: white;
+    font-size: 65px;
+    padding: 50px;
+  }
+
+  background-color: $color-dark;
+  border-radius: 8px;
+}
+
+.btn_github_sponsor {
+  vertical-align: middle;
+  margin-left: 18px;
+}
+
+.btn_github_signin {
+  background-image: url("/images/icons/github_white.svg");
+  background-repeat: no-repeat;
+  background-size: 24px;
+  background-position-x: 12px;
+  background-position-y: 6px;
+  padding-left: 46px;
+  margin-right: 18px;
+}
+
+/* < sm */
+@media only screen and (max-width: 576px) {
+  .btn_github_sponsor {
+    margin-top: 18px;
+    margin-left: 0px;
+  }
+  .btn_github_signin {
+    margin-top: 18px;
+  }
+}

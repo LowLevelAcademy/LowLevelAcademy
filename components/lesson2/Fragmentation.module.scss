@@ -1,0 +1,66 @@
+@import "../../styles/colors";
+
+.identification {
+  color: rgb(57, 190, 120);
+}
+
+.tableIdentification {
+  background-color: rgba(57, 190, 120, 0.1) !important;
+
+  &:hover {
+    background-color: rgba(57, 190, 120, 0.2) !important;
+  }
+}
+
+.fragmentOffset {
+  color: rgb(62, 147, 232);
+}
+
+.tableFragmentOffset {
+  background-color: rgba(62, 147, 232, 0.1) !important;
+
+  &:hover {
+    background-color: rgba(62, 147, 232, 0.2) !important;
+  }
+}
+
+.flags {
+  color: rgb(232, 175, 62);
+}
+
+.tableFlags {
+  background-color: rgba(232, 175, 62, 0.1) !important;
+
+  &:hover {
+    background-color: rgba(232, 175, 62, 0.2) !important;
+  }
+}
+
+.splitIpPacket {
+  border: 1px solid $color-grey;
+  font-size: 70%;
+  display: inline-block;
+  width: 200px;
+  margin-right: 14px;
+  margin-bottom: 7px;
+
+  & > div {
+    padding: 7px 14px;
+    border-top: 1px solid $color-grey;
+    text-align: center;
+  }
+
+  & > div:first-child {
+    border-top: none;
+  }
+}
+
+.mtu_block {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.packet_view {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}

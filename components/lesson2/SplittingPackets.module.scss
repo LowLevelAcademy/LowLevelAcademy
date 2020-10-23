@@ -1,0 +1,113 @@
+@import "../../styles/colors.scss";
+
+.postcardContainer {
+  margin: 25px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chunk {
+  padding: 7px;
+  border: 1px solid $color-grey;
+  border-radius: 4px;
+  display: inline-block;
+  margin-right: 15px;
+  margin-bottom: 15px;
+  text-align: center;
+  font-size: 75%;
+  vertical-align: top;
+}
+
+.chunkIndex {
+  width: 150px;
+  height: 150px;
+  margin-top: -150px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 300%;
+  color: $color-blue;
+  font-weight: bold;
+  text-shadow: 0px 0px 15px white;
+}
+
+.chunkCanvas {
+  $checkered-color: $color-grey;
+
+  background-image: linear-gradient(
+      45deg,
+      $checkered-color 25%,
+      transparent 25%
+    ),
+    linear-gradient(-45deg, $checkered-color 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, $checkered-color 75%),
+    linear-gradient(-45deg, transparent 75%, $checkered-color 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+  display: inline-block;
+
+  & > canvas {
+    width: 150px;
+    height: 150px;
+    display: block;
+  }
+}
+
+.skippedChunks {
+  width: 150px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 300%;
+  color: white;
+  font-weight: bold;
+  background: $color-blue;
+  border-radius: 4px;
+  margin-bottom: 5px;
+}
+
+.colorCoding {
+  text-align: center;
+  width: 50%;
+  margin: 25px auto;
+}
+
+.colorComponents {
+  display: flex;
+  justify-content: center;
+}
+
+.colorComponent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 15px;
+}
+
+.colorBlock {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 150%;
+  width: 75px;
+  height: 75px;
+  border-radius: 20px;
+  color: white;
+}
+
+.colorInput {
+  width: 75px;
+  text-align: center;
+  border: 1px solid $color-grey;
+  border-radius: 15px;
+  margin-bottom: 15px;
+}
+
+.colorComponentCombined {
+  border-top: 1px solid $color-grey;
+  padding-top: 15px;
+  margin-top: 15px;
+}

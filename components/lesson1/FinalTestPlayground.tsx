@@ -21,6 +21,7 @@ import SuccessAnimation, { SuccessAnimationState } from "../SuccessAnimation";
 import { wrapFinalTestCode } from "../../playground/lesson1/rust";
 import { FinalTest, markTestCompleted } from "../../playground/lesson1/actions";
 import VNetVisualize, { VNetInterface } from "../network/VirtualNetworkVis";
+import { initializeVirtualNetwork } from "../wasm/virtualNetwork";
 
 interface OutputProps {
   /**
@@ -52,9 +53,6 @@ const Output: React.FC<OutputProps> = (props) => {
     [0, 1],
     [0, 2],
   ];
-
-  // add_node('Alice', { x: 30, y: -180, z: 0 }, RED); // 2
-  // link_nodes([network_nodes[0], network_nodes[2]]);
 
   return (
     <div className="playground-vis row no-gutters">
@@ -97,26 +95,37 @@ export const FinalTestVis: React.FC = () => {
     // animate packets sending
     if (sentPackets.length > 0) {
       const lastSentPacket = sentPackets[sentPackets.length - 1];
+
+      const src = lastSentPacket.ip.sourceIp;
+      const dst = lastSentPacket.ip.destinationIp;
+
+      let link = visRef.current.getLink(0);
+      let rev = false;
+      if (src == "1.2.3.4" || src == "10.0.0.42") {
+        rev = true;
+      } else {
+        rev = false;
+      }
+      if (src == "10.0.0.42" || dst == "10.0.0.42") {
+        link = visRef.current.getLink(1);
+      }
+
       let delay = 0;
-      if (lastSentPacket.ip.sourceIp === "1.2.3.4") {
+      if (src === "1.2.3.4") {
         delay = 1000;
-      } else if (lastSentPacket.ip.destinationIp == "10.0.0.42") {
+      } else if (dst == "10.0.0.42") {
         delay = 2000;
-      } else if (lastSentPacket.ip.sourceIp == "10.0.0.42") {
+      } else if (src == "10.0.0.42") {
         delay = 3000;
       }
+
       setTimeout(() => {
-        visRef.current.emitPacket(
-          lastSentPacket.ip.sourceIp,
-          lastSentPacket.ip.destinationIp,
-          sentPackets.length
-        );
+        visRef.current.emitPacket(link, rev, sentPackets.length);
       }, delay);
     }
   }, [sentPackets]);
 
   // Initialise the virtual network module
-  // TODO: move this code to a separate component
   useEffect(() => {
     // Dispatches each new sent network frame
     const notifyPacket = (res_ptr, len) => {
@@ -126,38 +135,24 @@ export const FinalTestVis: React.FC = () => {
       dispatch(createPlaygroundAction(playgroundId, sendNetworkFrame(frame)));
     };
 
-    WebAssembly.instantiateStreaming(fetch("/virtualnet.wasm"), {
-      env: {
+    initializeVirtualNetwork(
+      vnetModule,
+      (exports) => {
+        exports.setup_network(false);
+      },
+      {
         notify_tx: notifyPacket,
-        notify_rx: () => {
-          // ignore notify_rx for now
-        },
         test_completed: (testNum) => {
-          console.log("Completed test!", testNum);
           dispatch(
             createPlaygroundAction(playgroundId, markTestCompleted(testNum))
           );
         },
-        print_log: (ptr, size) => {
-          const heap = new Uint8Array(vnetModule.current.exports.memory.buffer);
-
-          let s = "";
-          for (let i = ptr; i < ptr + size; ++i)
-            s += String.fromCharCode(heap[i]);
-
-          console.log(s);
-        },
-      },
-    }).then((module) => {
-      vnetModule.current = module.instance;
-      (vnetModule.current.exports.setup_network as CallableFunction)(false); // mockDns = false
-    });
+      }
+    );
   }, []);
 
   useEffect(() => {
     if (generatedWasm != null && vnetModule.current != null) {
-      console.log("Use effect!", vnetModule.current);
-
       const onExecSuccess = (result) => {
         dispatch(
           createPlaygroundAction(playgroundId, receiveExecutionSuccess(result))
@@ -171,13 +166,11 @@ export const FinalTestVis: React.FC = () => {
       // Parse result of fn main() execution
       const execMain = (resPtr, mod) => {
         // (vec_ptr, vec_len): (u32, u32)
-        console.log(resPtr);
         const expectedStr = "Hello from Alice!";
         const vptr = new Uint32Array(mod.exports.memory.buffer).slice(
           resPtr / 4,
           resPtr / 4 + 2
         );
-        console.log(vptr[0], vptr[1]);
 
         const bytes = new Uint8Array(mod.exports.memory.buffer).slice(
           vptr[0],
@@ -186,7 +179,6 @@ export const FinalTestVis: React.FC = () => {
         const str = new TextDecoder("utf-8").decode(
           bytes.slice(0, expectedStr.length)
         );
-        console.log(bytes, str);
 
         if (str == expectedStr) {
           // passed final test
@@ -203,7 +195,7 @@ export const FinalTestVis: React.FC = () => {
 
       evalFullDemoWasm(
         generatedWasm,
-        vnetModule.current,
+        vnetModule,
         execMain,
         onExecSuccess,
         onExecFailure
