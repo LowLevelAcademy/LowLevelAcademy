@@ -1,0 +1,47 @@
+import {
+  OutOfOrderDeliveryPlayground,
+  SortingChunks,
+  EnumeratePlayground,
+  EnumerateChunksPlayground,
+  ReorderChunksPlayground,
+  SendOrderedChunksPlayground,
+} from "./DynamicContents";
+
+As we have seen on the previous page, while we have successfully sent a picture to our friend Alice,
+she gets it in a scrambled form.
+
+This happens because there is no guarantee that messages sent over the network will be received in the same order they were sent.
+This is called _packet reordering_ and it can happen due to a number of reasons&mdash;for example, because network packets are
+sent through different routes for efficiency, or because network equipment processes them in a parallel manner.
+
+<OutOfOrderDeliveryPlayground />
+
+The solution to this problem is to include a packet number in the beginning of a message. This way, Alice will know how she
+needs to reorder the received sequences of bytes in order to reconstruct the original picture.
+
+<SortingChunks />
+
+With Rust, we can do this by using an iterator function called [`enumerate`](https://doc.rust-lang.org/stable/std/iter/trait.Iterator.html#method.enumerate),
+which gives us an index number for each iteration. Let's see how it works:
+
+<EnumerateChunksPlayground />
+
+Now you can see how each chunk is indexed.
+On the receiving end, we can restore the original order of packets by using the iterator function [`sort_by`](https://doc.rust-lang.org/stable/std/primitive.slice.html#method.sort_by):
+
+<ReorderChunksPlayground />
+
+Let's put all these techniques together to finally send Alice an image file in multiple sequenced parts:
+
+<SendOrderedChunksPlayground />
+
+Congratulations, you have finished the second lesson in the TCP/IP series!
+
+In the next one, we will learn how to deal with unreliable networks. In real-world networks, not all packets we
+send are guaranteed to be delivered, so we need to make sure that the receiver gets a complete message.
+We will learn how we can find out which packets were not delivered and how to retransmit them.
+
+<span className="dashed-message">
+  If you would like to follow updates, you can{" "}
+  <a href="https://eepurl.com/haHQUn">subscribe to our mailing&nbsp;list</a>.
+</span>

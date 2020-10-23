@@ -44,8 +44,11 @@ export function deserialize(savedState: string): Partial<State> {
   return parsedState.lesson1;
 }
 
-export default storage({
-  storageFactory: () => sessionStorage,
-  serialize,
-  deserialize,
-});
+const makeStorage = (key: string) =>
+  storage(key, {
+    storageFactory: () => sessionStorage,
+    serialize,
+    deserialize,
+  });
+
+export default makeStorage;

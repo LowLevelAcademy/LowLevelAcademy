@@ -3,7 +3,7 @@ import React from "react";
 export default function PrivacyPolicy() {
   return (
     <div className="row no-gutters">
-      <div className="col-10 offset-1 lesson-text">
+      <div className="col-10 offset-1 col-lg-9 col-xl-7 lesson-text">
         <h1 style={{ marginBottom: "75px" }}>Privacy Policy</h1>
         <p>
           At Low-Level Academy, we don't collect any personalised data about

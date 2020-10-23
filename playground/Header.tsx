@@ -30,11 +30,11 @@ const Header: React.FC = () => (
   </div>
 );
 
-interface HeaderSetProps {
+export interface HeaderSetProps {
   id: string;
 }
 
-const HeaderSet: React.FC<HeaderSetProps> = ({ id, children }) => (
+export const HeaderSet: React.FC<HeaderSetProps> = ({ id, children }) => (
   <div className={`header__set header__set--${id}`}>{children}</div>
 );
 

@@ -11,7 +11,10 @@ import ProgressBar, { ProgressPage } from "./ProgressBar";
 export interface LessonProps {
   // Unit that this lesson belongs to
   module: string;
+  // Badges ('Beginner', 'Rust', etc.).
   badges?: Array<string>;
+  // Sponsors for this lesson.
+  sponsors?: Array<string | Array<any>>;
 }
 
 const getElemPosition = (element) => {
@@ -76,7 +79,7 @@ const Lesson: React.FC<LessonProps> = (props) => {
       <NoScriptBar />
       {pages}
       <div className="row no-gutters lesson_text">
-        <div className="col-12" id="lesson-navigation">
+        <div className="col-11" id="lesson-navigation">
           <ProgressBar onSwitchPage={onSwitchPage} currentPage={currentPage}>
             {pagesTitles.map((page, index) => (
               <ProgressPage key={index} page={index + 1}>
@@ -86,7 +89,7 @@ const Lesson: React.FC<LessonProps> = (props) => {
           </ProgressBar>
         </div>
       </div>
-      <Fundraising />
+      <Fundraising sponsors={props.sponsors} />
     </>
   );
 };

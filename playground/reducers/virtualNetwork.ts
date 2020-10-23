@@ -202,7 +202,7 @@ export const decodePacket = (rawPacket) => {
     case Protocol.UDP:
       {
         const udp = decodeUdp(Buffer.from(ipPacket.data));
-        console.log("Raw:", rawPacket, "IP: ", ipPacket, "UDP: ", udp);
+        // console.log("Raw:", rawPacket, "IP: ", ipPacket, "UDP: ", udp);
 
         packet.type = "udp";
         packet.udp = udp;

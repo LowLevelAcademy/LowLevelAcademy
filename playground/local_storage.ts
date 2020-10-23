@@ -44,8 +44,11 @@ export function deserialize(savedState) {
   return parsedState.lesson1;
 }
 
-export default storage({
-  storageFactory: () => localStorage,
-  serialize,
-  deserialize,
-});
+const makeStorage = (key: string) =>
+  storage(key, {
+    storageFactory: () => localStorage,
+    serialize,
+    deserialize,
+  });
+
+export default makeStorage;

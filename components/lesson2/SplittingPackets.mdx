@@ -1,0 +1,46 @@
+import {
+  PostcardSketch,
+  ManipulateColorPlayground,
+  ChunksPlayground,
+  SendChunksPlayground,
+  Playground,
+  ColorCoding,
+} from "./DynamicContents";
+
+Now that we know how MTU works, let's assume that the MTU size in our virtual network is 65 kilobytes.
+It will make it easier to deal with larger files for the purposes of this lesson.
+
+Now you can paint a postcard you want to send to your friend:
+
+<PostcardSketch />
+
+If we look under the hood of this image file, we'll discover that it's just a sequence of bytes. There are
+different ways to encode images as data, but in this case we can assume that it's a _bitmap_, which means
+that every <abbr title="picture element, a single dot">pixel</abbr> is encoded with 4 component numbers,
+denoting the color intensity of red, green, blue, and alpha (which is used for opacity).
+
+<ColorCoding />
+
+This image is 300 x 300 pixels in size, and each pixel is encoded with 4 bytes. This means that the entire
+image will be of 300 x 300 x 4 = 360,000 bytes in size, or about 351 kilobytes. It should fit into 4 network packets.
+
+Since the image is a sequence of bytes, we can put them into an array and work with it just as with any other
+array of numbers. For example, let's see what will happen if we preserve only the red component of the image:
+
+<ManipulateColorPlayground />
+
+The same idea applies to _splitting_ the image into smaller parts. Rust has a powerful toolkit to work with arrays and sequences,
+[_iterators_](https://doc.rust-lang.org/stable/std/iter/index.html). With iterators, you can transform sequences
+of numbers in different ways&mdash;split them, create new sequences out of existing ones, combine them and calculate a single result
+(for example, summing them), etc. For our case of splitting an image into small parts, there's a function called [`slice::chunks`](https://doc.rust-lang.org/stable/std/primitive.slice.html#method.chunks).
+
+Let's see how it works:
+
+<ChunksPlayground />
+
+Now you can see how with a simple function call we can construct a series of packets with the size we need.
+
+Let's see how this works within our virtual network&mdash;we already know that Alice expects us to send her
+the 300 x 300 image file, so let's do that, using the familiar methods from the first lesson:
+
+<SendChunksPlayground />

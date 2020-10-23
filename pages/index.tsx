@@ -8,7 +8,7 @@ export default function ModulePage() {
   return (
     <>
       <div id="module_header" className="row no-gutters">
-        <div className="col-10 offset-1">
+        <div className="col-10 offset-1 col-xl-8">
           <h2>Network Programming</h2>
           <h1>
             <span className="pre-badge-header">TCP/IP Fundamentals</span>
@@ -21,12 +21,12 @@ export default function ModulePage() {
         <div className="col-12 module-animation">
           <ModuleHeaderAnimation />
         </div>
-        <div className="col-10 offset-1 module-description">
+        <div className="col-10 offset-1 col-xl-8 module-description">
           <p>
             In this course, you will learn how to work with the UDP and TCP
             internet protocols in real-world scenarios. You will apply your
-            skills to build small, fun networking applications in Rust—right in
-            your browser!
+            skills to build small, fun networking applications in Rust — right
+            in your browser!
           </p>
           <p>
             No previous knowledge of network programming is required, but we
@@ -39,12 +39,12 @@ export default function ModulePage() {
       </div>
       <div className="container-fluid no-padding">
         <div className="row no-gutters">
-          <div className="col-10 offset-1">
+          <div className="col-10 offset-1 col-xl-8">
             <div id="module_contents" className="row no-gutters">
               <LessonTile
                 href="prerequisites/binary-and-hexadecimal-numbers"
                 title="Number Encoding"
-                icon="prereq_number_encoding_grey.svg"
+                icon="prereq_number_endocing_grey.svg"
               >
                 Learn how to work with binary and hexadecimal numbers.
               </LessonTile>
@@ -57,7 +57,11 @@ export default function ModulePage() {
                 build a client for a simple name server that converts domain
                 names into IP addresses.
               </LessonTile>
-              <LessonTile title="Fragmentation" icon="fragmentation_grey.svg">
+              <LessonTile
+                title="Fragmentation"
+                icon="fragmentation_grey.svg"
+                href="/tcp-ip-fundamentals/fragmentation"
+              >
                 Learn how to transmit large files by splitting them into small
                 bits.
               </LessonTile>

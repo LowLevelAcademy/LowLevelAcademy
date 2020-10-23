@@ -18,7 +18,10 @@ export interface WrappedCode {
   code: string;
 }
 
-export type CodeWrapperFunction = (string) => WrappedCode;
+export type CodeWrapperFunction = (
+  code: string,
+  completeState: any
+) => WrappedCode;
 
 // Return the playground state depending on the context (each playground
 // has its own state and they're differentiated by the playground ID components).

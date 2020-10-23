@@ -4,6 +4,7 @@ import { DARK_GREY, GREEN } from "../../playground/lesson1/colours";
 
 import Zdog from "zdog";
 import Zfont from "zfont";
+import { useSelector } from "react-redux";
 
 Zfont.init(Zdog);
 const DOSIS = new Zdog.Font({ src: "/open-sans-lat_cyr-600.ttf" });
@@ -136,6 +137,7 @@ function CubicN(pct, a, b, c, d) {
 
 // Packet format: packet = {progress: 0..1, coords: {x:0, y:0}, speed_factor: 1, link: link object, reverse: true}
 // increment = amount in percents (0..1) of the full packet's path
+// Returns `false` when the packet has been successfully transferred.
 const transferPacket = (packet, increment) => {
   let path = packet.link.path;
   increment = increment * packet.speed_factor * animation_speed_factor;
@@ -175,7 +177,9 @@ const emitPacket = (
   name: string,
   speed_factor = 1,
   color = DARK_GREY,
-  reverse = false
+  size = 8,
+  reverse = false,
+  transferredCallback
 ) => {
   const packet = network_packet.copy();
 
@@ -183,6 +187,9 @@ const emitPacket = (
   label.value = name;
   label.rotate.x = -TAU / 4;
   label.translate = { x: 0, y: 0, z: 0 };
+  packet.width = size;
+  packet.height = size;
+  packet.depth = size;
   packet.progress = reverse ? 1 : 0;
   packet.speed_factor = speed_factor;
   packet.link = link;
@@ -194,6 +201,9 @@ const emitPacket = (
   packet.reverse = reverse;
   packet.name = name;
   packet.label = label;
+  packet.transferredCallback = transferredCallback;
+
+  transferPacket(packet, 0.01);
 
   state.illo.addChild(packet);
 
@@ -233,10 +243,14 @@ const animate = (state) => {
     const packet = state.packets[i];
 
     if (transferPacket(packet, 0.01) == false) {
-      state.packets.splice(i, 1);
-      state.textElements.splice(state.textElements.indexOf(packet.label), 1);
       state.illo.removeChild(packet);
       state.illo.removeChild(packet.label);
+      state.packets.splice(i, 1);
+      state.textElements.splice(state.textElements.indexOf(packet.label), 1);
+
+      if (packet.transferredCallback) {
+        packet.transferredCallback();
+      }
     }
   }
 
@@ -328,6 +342,9 @@ const VNetVisualize: React.ForwardRefRenderFunction<
   VNetInterface,
   VNetVisualizeProps
 > = (props, ref) => {
+  let currentPage = useSelector((state: any) =>
+    parseInt(state.navigation.lessonPage, 10)
+  );
   const canvasRef = useRef(null);
   const vnetState: React.MutableRefObject<State> = useRef({
     illo: null,
@@ -340,26 +357,32 @@ const VNetVisualize: React.ForwardRefRenderFunction<
   });
 
   useImperativeHandle(ref, () => ({
-    emitPacket: (src, dst, packetNum) => {
-      let rev = false;
-      let link = vnetState.current.links[0];
-      // FIXME: hardcode
-      if (src == "1.2.3.4" || src == "10.0.0.42") {
-        rev = true;
-      } else {
-        rev = false;
-      }
-      if (src == "10.0.0.42" || dst == "10.0.0.42") {
-        link = vnetState.current.links[1];
-      }
-      emitPacket(
-        vnetState.current,
-        link,
-        packetNum.toString(),
-        2,
-        DARK_GREY,
-        rev
-      );
+    getLink: (num) => vnetState.current.links[num],
+
+    // Emits a new packet in the network visualisation.
+    // Returns a promise that's resolved once the packet has been transferred.
+    // TODO: change this to take an object/interface
+    emitPacket: (
+      originLink,
+      isReverseDirection: boolean,
+      packetNum,
+      speed,
+      colour,
+      size
+    ) => {
+      const promise = new Promise((resolve, _reject) => {
+        emitPacket(
+          vnetState.current,
+          originLink,
+          packetNum.toString(),
+          speed || 2,
+          colour || DARK_GREY,
+          size || 8,
+          isReverseDirection,
+          resolve
+        );
+      });
+      return promise;
     },
     stopAnimation: () => {
       vnetState.current.stopAnimation = true;
@@ -374,7 +397,6 @@ const VNetVisualize: React.ForwardRefRenderFunction<
   };
 
   React.useEffect(() => {
-    const currentCanvas = canvasRef.current;
     window.addEventListener("resize", resized);
     return () => window.removeEventListener("resize", resized);
   });
@@ -384,7 +406,11 @@ const VNetVisualize: React.ForwardRefRenderFunction<
       // make sure the canvas element is visible before we start rendering it.
       visRender(canvasRef.current, props, vnetState.current);
     }
-  }, [canvasRef, canvasRef.current && canvasRef.current.offsetParent != null]);
+  }, [
+    currentPage,
+    canvasRef,
+    canvasRef.current && canvasRef.current.offsetParent != null,
+  ]);
 
   return <canvas ref={canvasRef} id="zdog-canvas" className="vnet-vis" />;
 };

@@ -89,7 +89,11 @@ const composeEnhancers: typeof compose =
   (typeof window !== "undefined" &&
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
   compose;
-const enhancers = composeEnhancers(middlewares, localStorage, sessionStorage);
+const enhancers = composeEnhancers(
+  middlewares,
+  localStorage("redux"),
+  sessionStorage("redux")
+);
 const store = createStore(appStateReducer, initialState, enhancers);
 
 configureRustErrors({

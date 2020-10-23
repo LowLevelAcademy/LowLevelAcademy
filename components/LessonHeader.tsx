@@ -12,7 +12,7 @@ export interface LessonHeaderProps {
 const LessonHeader: React.FC<LessonHeaderProps> = (props) => {
   return (
     <div id="module_header" className="row no-gutters">
-      <div className="col-10 offset-1">
+      <div className="col-10 offset-1 col-xl-8">
         <h2>
           <a href="/" className="back-link">
             &lt;
